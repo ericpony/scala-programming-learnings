@@ -11,3 +11,10 @@ def gcdLoop(x: Long, y: Long): Long = {
 
   b
 }
+
+var line = ""
+
+do {
+  line = readLine()
+  println("Read: " + line)
+} while (line != "")
