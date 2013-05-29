@@ -16,6 +16,9 @@ class Rational(n: Int, d: Int) {
       denominator * that.denominator
     )
 
+  def * (that: Rational): Rational =
+    new Rational(numerator * that.numerator, denominator * that.denominator)
+
   def lessThan(that: Rational) =
     numerator * that.denominator < that.numerator * denominator
 
