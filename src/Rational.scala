@@ -3,6 +3,7 @@ class Rational(n: Int, d: Int) {
   require(d != 0)
   val numerator: Int = n
   val denominator: Int = d
+  def this(n: Int) = this(n, 1)
   override def toString = numerator + "/" + denominator
   def add(that: Rational): Rational =
     new Rational(
