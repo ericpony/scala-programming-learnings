@@ -1,5 +1,4 @@
-// A common example, written in an imperative style:
-var filename = "default.txt"
-
-if (!args.isEmpty)
-  filename = args(0)
+// Scala's idiom for conditional initialization
+val filename =
+  if (!args.isEmpty) args(0)
+  else "default.txt"
