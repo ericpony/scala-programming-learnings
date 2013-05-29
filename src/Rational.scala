@@ -10,7 +10,7 @@ class Rational(n: Int, d: Int) {
 
   override def toString = numerator + "/" + denominator
 
-  def add(that: Rational): Rational =
+  def + (that: Rational): Rational =
     new Rational(
       numerator * that.denominator + that.numerator * denominator,
       denominator * that.denominator
