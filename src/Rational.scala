@@ -16,6 +16,9 @@ class Rational(n: Int, d: Int) {
       denominator * that.denominator
     )
 
+  def + (i: Int): Rational =
+    new Rational(numerator + i * denominator, denominator)
+
   def * (that: Rational): Rational =
     new Rational(numerator * that.numerator, denominator * that.denominator)
 
