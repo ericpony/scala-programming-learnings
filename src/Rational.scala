@@ -1,5 +1,7 @@
 
 class Rational(n: Int, d: Int) {
   require(d != 0)
-  override def toString = n + "/" + d
+  val numerator: Int = n
+  val denominator: Int = d
+  override def toString = numerator + "/" + denominator
 }
