@@ -12,6 +12,10 @@ def gcdLoop(x: Long, y: Long): Long = {
   b
 }
 
+// Determine the GCD with recursion instead of looping
+def gcd(x: Long, y: Long): Long =
+  if (y == 0) x else gcd(y, x % y)
+
 var line = ""
 
 do {
