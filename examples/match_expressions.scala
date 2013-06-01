@@ -1,9 +1,11 @@
 val firstArg = if (args.length > 0) args(0) else ""
 
-firstArg match {
-  case "salt" => println("pepper")
-  case "chips" => println("salsa")
-  case "rice" => println("beans")
-  case _ => "huh?"
-}
+val friend =
+  firstArg match {
+    case "salt" => "pepper"
+    case "chips" => "salsa"
+    case "rice" => "beans"
+    case _ => "huh?"
+  }
 
+println(friend)
