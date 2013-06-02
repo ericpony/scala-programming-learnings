@@ -8,4 +8,6 @@ numbers.filter((x: Int) => x > 0)
 
 // Both of the above function literals could be shortened by leaving off their parameter types, which can be inferred:
 numbers.foreach(x => println(x))
-numbers.filter(x => x > 0)
+
+// Use the placeholder syntax to make the code even more concise, for function literals that were just one expression
+numbers.filter(_ > 0)
