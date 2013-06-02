@@ -5,3 +5,7 @@ numbers.foreach((x: Int) => println(x))
 
 // filter the elements from numbers that are not greater than 0:
 numbers.filter((x: Int) => x > 0)
+
+// Both of the above function literals could be shortened by leaving off their parameter types, which can be inferred:
+numbers.foreach((x) => println(x))
+numbers.filter((x) => x > 0)
