@@ -26,3 +26,13 @@ def bang(x: Int): Int =
 // java.lang.Exception: bang!
 // 	at .bang(<console>:9)
 // 	at .<init>(<console>:9)
+
+// Tail recursion on the JVM is limited to only the most basic kind. Scala only optimizes directly recursive calls back
+// to the same function making the call. If the recursion is indirect, as in the following example of two mutually
+// recursive functions, no optimization is possible:
+
+// Mutual recursion is not tail-call optimizable:
+def isEven(x: Int): Boolean =
+  if (x == 0) true else isOdd(x - 1)
+def isOdd(x: Int): Boolean =
+  if (x == 0) false else isEven(x - 1)
