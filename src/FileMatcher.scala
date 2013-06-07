@@ -5,4 +5,8 @@ object FileMatcher {
   def filesEndingIn(query: String) =
     for (file <- filesHere; if file.getName.endsWith(query))
       yield file
+
+  def filesContaining(query: String) =
+    for (file <- filesHere; if file.getName.contains(query))
+      yield file
 }
