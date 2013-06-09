@@ -2,6 +2,11 @@
 object FileMatcher {
   private def filesHere = (new java.io.File(".")).listFiles
 
+  private def filesMatching(matcher: String => Boolean) = {
+    for (file <- filesHere; if matcher(file.getName))
+    yield file
+  }
+
   def filesEndingIn(query: String) =
     filesMatching(_.endsWith(query))
 
@@ -10,9 +15,4 @@ object FileMatcher {
 
   def filesMatchingRegex(query: String) =
     filesMatching(_.matches(query))
-
-  def filesMatching(matcher: String => Boolean) = {
-    for (file <- filesHere; if matcher(file.getName))
-      yield file
-  }
 }
