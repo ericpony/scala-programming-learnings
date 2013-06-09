@@ -13,4 +13,9 @@ object FileMatcher {
   def filesMatchingRegex(query: String) =
     for (file <- filesHere; if file.getName.matches(query))
       yield file
+
+  def filesMatching(query: String, matcher: (String, String) => Boolean) = {
+    for (file <- filesHere; if matcher(file.getName, query))
+      yield file
+  }
 }
