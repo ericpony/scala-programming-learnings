@@ -36,3 +36,35 @@ withPrintWriter(
 // withPrintWriter loans a PrintWriter to the function, op. When the function completes, it signals that it no longer
 // needs the "borrowed" resource. The resource is then closed in a finally block, to ensure it is indeed closed,
 // regardless of whether the function completes by returning normally or throwing an exception.
+
+// One way in which you can make the client code look a bit more like a built-in control structure is to use
+// curly braces instead of parentheses to surround the argument list. In any method invocation in Scala
+// in which you're passing in exactly one argument, you can opt to use curly braces to surround the argument
+// instead of parentheses. For example, instead of
+println("Hello, world!")
+
+// you could write:
+println { "Hello, world!" }
+
+// The purpose of this ability to substitute curly braces for parentheses for passing in one argument is to enable
+// client programmers to write function literals between curly braces. This can make a method call feel more like a
+// control abstraction. For example, if we could somehow reorganize withPrintWriter so that it only took a single
+// parameter, then we could make it look like a native control structure. Why don't we try currying?
+def withPrintWriter(file: File)(op: PrintWriter => Unit) {
+  val writer = new PrintWriter(file)
+  try {
+    op(writer)
+  } finally {
+    writer.close()
+  }
+}
+
+// Now, we can call the method with a more pleasing syntax:
+val file = new File("date.txt")
+
+withPrintWriter(file) {
+  writer => writer.println(new java.util.Date)
+}
+
+// Here, the first argument list, which contains one File argument, is written surrounded by the parentheses.
+// The second argument list, which contains one function argument, is surrounded by curly braces.
