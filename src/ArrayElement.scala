@@ -1,3 +1,3 @@
-class ArrayElement(lines: Array[String]) extends Element {
-  def contents: Array[String] = lines
-}
+class ArrayElement(
+  val contents: Array[String]
+) extends Element
