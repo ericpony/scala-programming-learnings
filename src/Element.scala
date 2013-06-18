@@ -1,6 +1,10 @@
 import Element.elem
 
 object Element {
+  private class ArrayElement(
+    val contents: Array[String]
+  ) extends Element
+
   def elem(contents: Array[String]): Element =
     new ArrayElement(contents)
 
