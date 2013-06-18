@@ -5,6 +5,12 @@ object Element {
     val contents: Array[String]
   ) extends Element
 
+  private class LineElement(s: String) extends Element {
+    val contents = Array(s)
+    override def width: Int = s.length
+    override def height: Int = 1
+  }
+
   def elem(contents: Array[String]): Element =
     new ArrayElement(contents)
 
