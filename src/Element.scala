@@ -33,17 +33,20 @@ object Element {
 abstract class Element {
   def contents: Array[String]
   def height: Int = contents.length
-  def width: Int = if (height == 0) 0 else contents(0).length
+  def width: Int = contents(0).length
 
-  def above(that: Element): Element =
-    elem(this.contents ++ that.contents)
+  def above(that: Element): Element = {
+    val this1 = this widen that.width
+    val that1 = that widen this.width
+    elem(this1.contents ++ that1.contents)
+  }
 
   def beside(that: Element): Element = {
+    val this1 = this heighten that.height
+    val that1 = that heighten this.height
     elem(
-      for (
-        (line1, line2) <- this.contents zip that.contents
-      ) yield line1 + line2
-    )
+      for ((line1, line2) <- this1.contents zip that1.contents)
+      yield line1 + line2)
   }
 
   def widen(w: Int): Element =
