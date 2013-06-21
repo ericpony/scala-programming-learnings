@@ -40,11 +40,8 @@ class Rational(n: Int, d: Int) extends Ordered[Rational] {
   def / (i: Int): Rational =
     new Rational(numerator, denominator * i)
 
-  def lessThan(that: Rational) =
-    numerator * that.denominator < that.numerator * denominator
-
   def max(that: Rational) =
-    if (lessThan(that)) that else this
+    if (this < that) that else this
 
   def compare(that: Rational) =
     (this.numerator * that.denominator) - (that.numerator * this.denominator)
