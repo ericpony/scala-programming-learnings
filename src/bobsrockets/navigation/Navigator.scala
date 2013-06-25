@@ -1,3 +1,7 @@
+package bobsrockets {
+  class Ship
+}
+
 package bobsrockets.navigation {
   package navigation {
     //  package bobsrockets.navigation
@@ -14,15 +18,10 @@ package bobsrockets.navigation {
     }
   }
 
-  class Ship {
-    // No need to say bobsrockets.navigation.Navigator
-    val nav = new navigation.Navigator
-  }
-
   package fleets {
     class Fleet {
-      // No need to say bobsrockets.Ship
-      def addShip() { new Ship }
+      // Doesn't compile! Ship is no longer in scope!
+      // def addShip() { new Ship }
     }
   }
 }
