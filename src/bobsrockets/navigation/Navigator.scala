@@ -1,3 +1,3 @@
-package bobsrockets.navigation
-
-class Navigator
+package bobsrockets.navigation {
+  class Navigator
+}
