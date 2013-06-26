@@ -2,6 +2,8 @@
 import bobsdelights.Fruit
 // easy access to all members of bobsdelights
 import bobsdelights._
+// easy access to all members of Fruits
+import bobsdelights.Fruits._
 
 package bobsdelights {
   abstract class Fruit (
