@@ -16,5 +16,10 @@ package bobsdelights {
     object Orange extends Fruit("orange", "orange")
     object Pear extends Fruit("pear", "pear-colored")
     val menu = List(Apple, Orange, Pear)
+
+    def showFruit(fruit: Fruit) {
+      import fruit._
+      println(name + "s are " + color)
+    }
   }
 }
