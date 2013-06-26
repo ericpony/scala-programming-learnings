@@ -1,3 +1,6 @@
+// easy access to Fruit
+import bobsdelights.Fruit
+
 package bobsdelights {
   abstract class Fruit (
     val name: String,
