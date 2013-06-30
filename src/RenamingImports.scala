@@ -1,5 +1,6 @@
 // You can alias your imports, renaming Apple to McIntosh in this example.
 import bobsdelights.Fruits.{Apple => McIntosh}
+import java.{sql => S}
 
 object RenamingImports {
   // After the above import, you can access the same object either via McIntosh or
