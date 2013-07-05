@@ -18,4 +18,10 @@ class ElementSuite extends FunSuite {
       element.width
     }
   }
+
+  test("Should throw an IllegalArgumentException when passed a negative number") {
+    intercept[IllegalArgumentException] {
+      elem('y', -2, 3)
+    }
+  }
 }

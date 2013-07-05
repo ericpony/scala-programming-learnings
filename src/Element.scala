@@ -16,6 +16,8 @@ object Element {
     override val width: Int,
     override val height: Int
   ) extends Element {
+    if (width < 1)
+      throw new IllegalArgumentException("width must be positive")
     private val line = ch.toString * width
     def contents = Array.fill(height)(line)
   }
