@@ -12,4 +12,10 @@ class ElementSuite extends FunSuite {
     assert(element.width === 4)
   }
 
+  test("The expectResult function is another way to do assertions") {
+    val element = elem('x', 5, 6)
+    expectResult(5) {
+      element.width
+    }
+  }
 }
