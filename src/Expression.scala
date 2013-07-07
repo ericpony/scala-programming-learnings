@@ -3,3 +3,10 @@ abstract class Expression
   case class Number(number: Double) extends Expression
   case class UnaryOperator(operator: String, arg: Expression) extends Expression
   case class BinaryOperator(operator: String, left: Expression, right: Expression) extends Expression
+
+def simplifyTop(expr: Expression): Expression = expr match {
+  case UnaryOperator("-", UnaryOperator("-", e))  => e // Double negation
+  case BinaryOperator("+", e, Number(0)) => e          // Adding zero
+  case BinaryOperator("*", e, Number(1)) => e          // Multiplying by one
+  case _ => expr
+}
