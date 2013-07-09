@@ -52,4 +52,14 @@ object PatternMatchExamples {
       case _ => "OK"
     }
   }
+
+  def ifYouInsistOnLowerCaseConstantPatternsYouCanUseBackticks() = {
+    import math.E
+    val pi = math.Pi
+
+    E match {
+      case `pi` => "strange math? Pi = " + pi
+      case _ => "OK"
+    }
+  }
 }
