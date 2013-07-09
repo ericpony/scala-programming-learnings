@@ -40,4 +40,16 @@ object PatternMatchExamples {
       case _ => "OK"
     }
   }
+
+  def thisPatternNowCausesMoreWarnings() = {
+    import math.E
+    val pi = math.Pi
+
+    E match {
+      // Warning: patterns after a variable pattern cannot match (SLS 8.1.1)
+      case pi => "strange math? Pi = " + pi
+      // Warning: unreachable code due to variable pattern 'pi' on line 50
+      case _ => "OK"
+    }
+  }
 }
