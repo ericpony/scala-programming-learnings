@@ -30,4 +30,14 @@ object PatternMatchExamples {
       case somethingElse => "not zero: " + somethingElse
     }
   }
+
+  def variablePatternOrConstantPattern_?() = {
+    import math.{E, Pi}
+
+    // will yield "OK", because E does not match PI
+    E match {
+      case Pi => "strange math ? Pi = " + Pi
+      case _ => "OK"
+    }
+  }
 }
