@@ -1,3 +1,5 @@
+package net.miladinov.patternmatching
+
 abstract class Expression {
   def simplifyTop(expr: Expression): Expression = expr match {
     case UnaryOperator("-", UnaryOperator("-", e))  => e // Double negation
