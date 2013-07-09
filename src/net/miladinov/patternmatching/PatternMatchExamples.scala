@@ -23,4 +23,11 @@ object PatternMatchExamples {
     case Nil => "the empty list"
     case _ => "something else"
   }
+
+  def variablePattern(expr: Any) = {
+    expr match {
+      case 0 => "zero"
+      case somethingElse => "not zero: " + somethingElse
+    }
+  }
 }
