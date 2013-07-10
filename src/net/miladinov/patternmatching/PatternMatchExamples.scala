@@ -62,4 +62,11 @@ object PatternMatchExamples {
       case _ => "OK"
     }
   }
+
+  def constructorPatternsForDeepMatches(expr: Expression) = {
+    expr match {
+      case BinaryOperator("+", e, Number(0)) => println("a deep match")
+      case _ =>
+    }
+  }
 }
