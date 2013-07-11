@@ -69,4 +69,11 @@ object PatternMatchExamples {
       case _ =>
     }
   }
+
+  def sequencePatternsLetYouSpecifyAnyNumberOfPatternElements(expr: Any) = {
+    expr match {
+      case List(0, _, _) => println("Found it!")
+      case _ =>
+    }
+  }
 }
