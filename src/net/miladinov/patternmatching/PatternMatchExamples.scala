@@ -83,4 +83,11 @@ object PatternMatchExamples {
       case _ =>
     }
   }
+
+  def tuplePatterns(expr: Any) = {
+    expr match {
+      case (a, b, c) => println("matched " + a + b + c)
+      case _ =>
+    }
+  }
 }
