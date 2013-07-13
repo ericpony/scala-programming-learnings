@@ -113,4 +113,9 @@ object PatternMatchExamples {
     case m: Map[Int, Int] => true
     case _ => false
   }
+
+  def isAStringArray(x: Any) = x match {
+    case a: Array[String] => "yes"
+    case _ => "no"
+  }
 }
