@@ -108,4 +108,9 @@ object PatternMatchExamples {
       -1
     }
   }
+
+  def isAnIntMap(x: Any) = x match {
+    case m: Map[Int, Int] => true
+    case _ => false
+  }
 }
