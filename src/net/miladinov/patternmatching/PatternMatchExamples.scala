@@ -96,4 +96,16 @@ object PatternMatchExamples {
     case m: Map[_, _] => m.size
     case _ => -1
   }
+
+  def generalSizeWithoutPatternMatching(x: Any) = {
+    if (x.isInstanceOf[String]) {
+      val s = x.asInstanceOf[String]
+      s.length
+    } else if (x.isInstanceOf[Map[_, _]]) {
+      val m = x.asInstanceOf[Map[_, _]]
+      m.size
+    } else {
+      -1
+    }
+  }
 }
