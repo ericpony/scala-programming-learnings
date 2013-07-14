@@ -118,4 +118,11 @@ object PatternMatchExamples {
     case a: Array[String] => "yes"
     case _ => "no"
   }
+
+  def variableBindingPattern(expr: Any) = {
+    expr match {
+      case UnaryOperator("abs", e @ UnaryOperator("abs", _)) => e
+      case _ =>
+    }
+  }
 }
