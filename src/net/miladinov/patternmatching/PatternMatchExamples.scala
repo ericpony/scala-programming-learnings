@@ -125,4 +125,9 @@ object PatternMatchExamples {
       case _ =>
     }
   }
+
+  def simplifyAdd(e: Expression) = e match {
+    case BinaryOperator("+", x, y) if x == y => BinaryOperator("*", x, Number(2))
+    case _ => e
+  }
 }
