@@ -130,4 +130,9 @@ object PatternMatchExamples {
     case BinaryOperator("+", x, y) if x == y => BinaryOperator("*", x, Number(2))
     case _ => e
   }
+
+  def incrementPositiveIntegers(x: Any) = x match {
+    case n: Int if n > 0 => n + 1
+    case _ =>
+  }
 }
