@@ -135,4 +135,9 @@ object PatternMatchExamples {
     case n: Int if n > 0 => n + 1
     case _ =>
   }
+
+  def onlyStringsThatStartWithTheLetterA(x: Any) = x match {
+    case s: String if s(0) == 'a' => s + " starts with a"
+    case _ => x
+  }
 }
