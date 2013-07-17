@@ -1,6 +1,6 @@
 package net.miladinov.patternmatching
 
-abstract class Expression {
+object Expression {
   def simplifyTop(expr: Expression): Expression = expr match {
     case UnaryOperator("-", UnaryOperator("-", e))  => e // Double negation
     case BinaryOperator("+", e, Number(0)) => e          // Adding zero
@@ -18,6 +18,7 @@ abstract class Expression {
   }
 }
 
+abstract class Expression
 case class Variable(name: String) extends Expression
 case class Number(number: Double) extends Expression
 case class UnaryOperator(operator: String, arg: Expression) extends Expression
