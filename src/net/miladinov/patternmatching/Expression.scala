@@ -18,7 +18,7 @@ object Expression {
   }
 }
 
-abstract class Expression
+sealed abstract class Expression
 case class Variable(name: String) extends Expression
 case class Number(number: Double) extends Expression
 case class UnaryOperator(operator: String, arg: Expression) extends Expression
