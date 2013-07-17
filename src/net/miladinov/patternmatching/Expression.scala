@@ -7,6 +7,15 @@ abstract class Expression {
     case BinaryOperator("*", e, Number(1)) => e          // Multiplying by one
     case _ => expr
   }
+
+  def simplifyAll(expr: Expression):Expression = expr match {
+    case UnaryOperator("-", UnaryOperator("-", e)) => simplifyAll(e)  // "-" is its own inverse
+    case BinaryOperator("+", e, Number(0)) => simplifyAll(e)          // 0 is a neutral element for "+"
+    case BinaryOperator("*", e, Number(1)) => simplifyAll(e)          // 1 is a neutral element for "*"
+    case UnaryOperator(op, e) => UnaryOperator(op, simplifyAll(e))
+    case BinaryOperator(op, l, r) => BinaryOperator(op, simplifyAll(l), simplifyAll(r))
+    case _ => expr
+  }
 }
 
 case class Variable(name: String) extends Expression
