@@ -16,6 +16,11 @@ object Expression {
     case BinaryOperator(op, l, r) => BinaryOperator(op, simplifyAll(l), simplifyAll(r))
     case _ => expr
   }
+
+  def describe(expr: Expression): String = (expr: @unchecked) match {
+    case Number(_) => " a Number"
+    case Variable(_) => " a Variable"
+  }
 }
 
 sealed abstract class Expression
