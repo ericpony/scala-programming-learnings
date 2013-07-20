@@ -3,7 +3,7 @@ val capitals = Map("Italy" -> "Rome", "Germany" -> "Berlin", "Norway" -> "Oslo")
 
 // You can use a pattern match to destructure each key-value pair as you iterate:
 for ((country, city) <- capitals)
-  println("The capital of " + country + " is " + city)
+  println(s"The capital of $country is $city")
 
 // The pair pattern shown above was special because the match against it
 // can never fail. // Indeed, `capitals` yields a sequence of pairs, so you can
