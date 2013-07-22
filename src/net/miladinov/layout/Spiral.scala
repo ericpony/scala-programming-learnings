@@ -1,3 +1,5 @@
+package net.miladinov.layout
+
 import Element.elem
 
 object Spiral {

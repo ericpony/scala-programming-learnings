@@ -1,3 +1,4 @@
+import net.miladinov.layout.Element
 import org.scalatest.Suite
 import Element.elem
 

@@ -1,3 +1,4 @@
+import net.miladinov.layout.Element
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers
 import Element.elem

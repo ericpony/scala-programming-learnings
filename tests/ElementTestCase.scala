@@ -1,3 +1,4 @@
+import net.miladinov.layout.Element
 import org.junit.Test
 import org.junit.Assert.{assertEquals, fail}
 import Element.elem

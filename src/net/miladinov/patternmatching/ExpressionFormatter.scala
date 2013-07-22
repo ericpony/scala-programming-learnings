@@ -1,7 +1,7 @@
 package net.miladinov.patternmatching
 
-import _root_.Element
-import _root_.Element.elem
+import net.miladinov.layout.Element
+import Element.elem
 
 class ExpressionFormatter {
   // Contains operators in groups of increasing precedence
