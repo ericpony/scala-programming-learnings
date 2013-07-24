@@ -102,3 +102,32 @@ def append[T](xs: List[T], ys: List[T]): List[T] = xs match {
   case x :: xs1 => x :: append(xs1, ys)
 }
 
+
+// Taking the length of a List is trivial:
+List(1, 2, 3).length
+// returns: Int = 3
+
+// Methods init and last are reverses of head and tail.
+// For example:
+val abcde = List('a', 'b', 'c', 'd', 'e')
+// returns: List[Char] = List(a, b, c, d, e)
+abcde.last
+// returns: Char = e
+abcde.init
+// returns: List[Char] = List('a', 'b', 'c', 'd')
+
+// Like head and tail, these methods throw an exception when applied to the empty List:
+List().init
+// java.lang.UnsupportedOperationException: Nil.init
+// at scala.List.init(List.scala:544)
+// at ...
+List().last
+// java.util.NoSuchElementException: Nil.last
+// at scala.List.last(List.scala:563)
+// at ...
+
+// Unlike head and tail, which both run in constant time, init and last need to traverse
+// the whole list to compute their result. They therefore take time proportional to the
+// length of the list. It’s a good idea to organize your data so that most accesses are
+// at the head of a list, rather than the last element.
+
