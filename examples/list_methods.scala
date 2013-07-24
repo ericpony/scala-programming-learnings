@@ -92,3 +92,13 @@ thrill.sortWith((s, t) =>
 // returns the thrill list minus its first element
 // (returns List("fill", "until"))
 thrill.tail
+
+
+// This code pretends that we don't already have List's ::: (concat) method, and
+// we'll be re-implementing it as a stand-alone function, append(), that takes two Lists
+// and returns a new List with the contents of the other two.
+def append[T](xs: List[T], ys: List[T]): List[T] = xs match {
+  case List() => ys
+  case x :: xs1 => x :: append(xs1, ys)
+}
+
