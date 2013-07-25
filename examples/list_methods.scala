@@ -131,3 +131,29 @@ List().last
 // length of the list. It’s a good idea to organize your data so that most accesses are
 // at the head of a list, rather than the last element.
 
+
+// If at some point in the computation an algorithm demands frequent accesses to the end
+// of a list, it’s sometimes better to reverse the list first and work with the result
+// instead. Here’s how to do the reversal:
+abcde.reverse
+// returns: List[Char] = List(e, d, c, b, a)
+
+// Note that, like all other list operations, reverse creates a new list rather than
+// changing the one it operates on. Since lists are immutable, such a change would not be
+// possible, anyway. To verify this, check that the original value of abcde is unchanged
+// after the reverse operation:
+abcde
+// returns: List[Char] = List(a, b, c, d, e)
+
+// The reverse, init, and last operations satisfy some laws that can be used for reasoning
+// about computations and for simplifying programs.
+
+// 1. reverse is its own inverse:
+val xs = List("foo", "bar", "baz")
+xs.reverse.reverse equals xs
+
+// 2. reverse turns init to tail and last to head, except that the elements are reversed:
+xs.reverse.init equals xs.tail.reverse
+xs.reverse.tail equals xs.init.reverse
+xs.reverse.head equals xs.last
+xs.reverse.last equals xs.head
