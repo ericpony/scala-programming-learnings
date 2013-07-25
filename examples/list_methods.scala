@@ -157,3 +157,20 @@ xs.reverse.init equals xs.tail.reverse
 xs.reverse.tail equals xs.init.reverse
 xs.reverse.head equals xs.last
 xs.reverse.last equals xs.head
+
+// Reverse could be implemented using concatenation (:::), like in the following method, rev:
+def rev[T](xs: List[T]): List[T] = xs match {
+  case List() => xs
+  case x :: xs1 => rev(xs1) ::: List(x)
+}
+
+// However, this method is less efficient than one would hope for. To study the complexity
+// of rev, assume that the list xs has length n. Notice that there are n recursive calls
+// to rev. Each call except the last involves a list concatenation. List concatenation
+// xs ::: ys takes time proportional to the length of its first argument xs. Hence,
+// the total complexity of rev is:
+// n + (n - 1) + ... + 1 = (1 + n) * n / 2
+// In other words, rev’s complexity is quadratic in the length of its input argument.
+// This is disappointing when compared to the standard reversal of a mutable, linked list,
+// which has linear complexity. However, the current implementation of rev is not the best
+// implementation possible. Future learnings will show how to speed this up.
