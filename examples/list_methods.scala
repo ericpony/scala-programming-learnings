@@ -174,3 +174,16 @@ def rev[T](xs: List[T]): List[T] = xs match {
 // This is disappointing when compared to the standard reversal of a mutable, linked list,
 // which has linear complexity. However, the current implementation of rev is not the best
 // implementation possible. Future learnings will show how to speed this up.
+
+// The drop and take operations generalize tail and init in that they return arbitrary
+// prefixes or suffixes of a list. The expression “xs take n” returns the first n elements
+// of the list xs. If n is greater than xs.length, the whole list xs is returned.
+// The operation “xs drop n” returns all elements of the list xs except the first n ones.
+// If n is greater than xs.length, the empty list is returned. The splitAt operation splits
+// the list at a given index, returning a pair of two lists.
+
+// define n to satisfy the interpreter:
+val n = 5
+
+// splitAt is defined by the equality:
+xs splitAt n equals (xs take n, xs drop n)
