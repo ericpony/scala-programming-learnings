@@ -187,3 +187,13 @@ val n = 5
 
 // splitAt is defined by the equality:
 xs splitAt n equals (xs take n, xs drop n)
+
+// Here are some examples of take, drop and splitAt:
+abcde take 2
+// returns: List[Char] = List(a, b)
+
+abcde drop 2
+// returns: List[Char] = List(c, d, e)
+
+abcde splitAt 2
+// returns: (List[Char], List[Char]) = (List(a, b), List(c, d, e))
