@@ -197,3 +197,25 @@ abcde drop 2
 
 abcde splitAt 2
 // returns: (List[Char], List[Char]) = (List(a, b), List(c, d, e))
+
+// Random element selection is supported through the apply method;
+// however it is a less common operation for lists than it is for arrays.
+abcde apply 2 // rare in Scala
+// returns: Char = c
+
+// As for all other types, apply is implicitly inserted when an object
+// appears in the function position in a method call, so the line above
+// can be shortened to:
+abcde(2) // rare in Scala
+// returns: Char = c
+
+// One reason why random element selection is less popular for lists
+// than for arrays is that xs(n) takes time proportional to the index n.
+// In fact, apply is simply defined by a combination of drop and head:
+xs apply n equals (xs drop n).head
+
+// This definition also makes clear that list indices range from 0 up
+// to the length of the list minus one, the same as for arrays. The indices
+// method returns a list consisting of all valid indices of a given list:
+abcde.indices
+// returns: scala.collection.immutable.Range = Range(0, 1, 2, 3, 4)
