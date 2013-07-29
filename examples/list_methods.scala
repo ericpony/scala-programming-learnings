@@ -219,3 +219,17 @@ xs apply n equals (xs drop n).head
 // method returns a list consisting of all valid indices of a given list:
 abcde.indices
 // returns: scala.collection.immutable.Range = Range(0, 1, 2, 3, 4)
+
+// The flatten method takes a list of lists and flattens it out to a single list:
+List(List(1, 2), List(3), List(), List(4, 5)).flatten
+// returns: List[Int] = List(1, 2, 3, 4, 5)
+
+val fruit: List[String] = List("apples", "oranges", "pears")
+fruit.map(_.toCharArray).flatten
+// returns: List[Char] = List(a, p, p, l, e, s, o, r, a, n, g, e, s, p, e, a, r, s)
+
+// It can only be applied to lists whose elements are all lists.
+// Trying to flatten any other list will give a compilation error:
+List(1, 2, 3).flatten
+//  <console>:5: error: could not find implicit value for parameter
+// asTraversable: (Int) => Traversable[B] List(1, 2, 3).flatten
