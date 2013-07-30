@@ -233,3 +233,24 @@ fruit.map(_.toCharArray).flatten
 List(1, 2, 3).flatten
 //  <console>:5: error: could not find implicit value for parameter
 // asTraversable: (Int) => Traversable[B] List(1, 2, 3).flatten
+
+// The zip operation takes two lists and forms a list of pairs:
+abcde.indices zip abcde
+// returns: scala.collection.immutable.IndexedSeq[(Int, Char)] = IndexedSeq((0,a), (1,b), (2,c), (3,d), (4,e))
+
+// If the two lists are of different length, any unmatched elements are dropped:
+val zipped = abcde zip List(1, 2, 3)
+// returns: zipped: List[(Char, Int)] = List((a,1), (b,2), (c,3))
+
+// A useful special case is to zip a list with its index. This is done most efficiently
+// with the zipWithIndex method, which pairs every element of a list with the position
+// where it appears in the list.
+abcde.zipWithIndex
+// returns: List[(Char, Int)] = List((a,0), (b,1), (c,2), (d,3), (e,4))
+
+// Any list of tuples can also be changed back to a tuple of lists by using the unzip method:
+zipped.unzip
+// returns: (List[Char], List[Int]) = (List(a, b, c), List(1, 2, 3))
+
+// The zip and unzip methods provide one way to operate on multiple lists together.
+// But there are other ways that are sometimes more concise.
