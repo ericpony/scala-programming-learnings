@@ -254,3 +254,48 @@ zipped.unzip
 
 // The zip and unzip methods provide one way to operate on multiple lists together.
 // But there are other ways that are sometimes more concise.
+
+// The toString operation returns the canonical string representation of a list:
+abcde.toString
+// returns: String = List(a, b, c, d, e)
+
+// If you want a different representation you can use the mkString method. The operation xs mkString (pre, sep, post)
+// involves four operands: the list xs to be displayed, a prefix string pre to be displayed in front of all elements,
+// a separator string sep to be displayed between successive elements, and a postfix string post
+// to be displayed at the end. The result of the operation is the string:
+// pre + xs(0) + sep + ...+ sep + xs(xs.length - 1) + post
+
+// The mkString method has two overloaded variants that let you drop some or all of its arguments. The first variant
+// only takes a separator string:
+val sep = ":separator:"
+(xs mkString sep) equals (xs mkString ("", sep, ""))
+
+// The second variant lets you omit all arguments:
+xs.mkString equals (xs mkString "")
+
+// Here are some examples:
+
+abcde mkString ("[", ",", "]")
+// returns: String = [a,b,c,d,e]
+
+abcde mkString ""
+// returns: String = abcde
+
+abcde.mkString
+// returns: String = abcde
+
+abcde mkString ("List(", ", ", ")")
+// returns: String = List(a, b, c, d, e)
+
+// There are also variants of the mkString methods called addString which append the constructed string
+// to a StringBuilder (Scala's scala.StringBuilder, not Java's java.lang.StringBuilder) object,
+// rather than returning them as a result:
+
+val buf = new StringBuilder
+// returns: buf: StringBuilder =
+
+abcde addString (buf, "(", ";", ")")
+// returns: StringBuilder = (a;b;c;d;e)
+
+// The mkString and addString methods are inherited from List’s super trait Traversable, so they are applicable
+// to all other collections, as well.
