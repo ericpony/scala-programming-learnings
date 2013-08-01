@@ -299,3 +299,32 @@ abcde addString (buf, "(", ";", ")")
 
 // The mkString and addString methods are inherited from List’s super trait Traversable, so they are applicable
 // to all other collections, as well.
+
+// To convert data between the flat world of arrays and the recursive world of
+// lists, you can use method toArray in class List and toList in class Array:
+val arr = abcde.toArray
+// returns: arr: Array[Char] = Array(a, b, c, d, e)
+
+arr.toList
+// returns: List[Char] = List(a, b, c, d, e)
+
+// There’s also a method copyToArray, which copies list elements to successive array positions
+// within some destination array. The operation: xs copyToArray (arr, start)
+// copies all elements of the list xs to the array arr, beginning with position start.
+// You must ensure that the destination array arr is large enough to hold the list in full.
+// Here’s an example:
+val arr2 = new Array[Int](10)
+// returns: arr2: Array[Int] = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+List(1, 2, 3) copyToArray (arr2, 3)
+// arr2 is now: Array[Int] = Array(0, 0, 0, 1, 2, 3, 0, 0, 0, 0)
+
+// Finally, if you need to access list elements via an iterator, you can use the iterator method:
+val it = abcde.iterator
+// returns: it: Iterator[Char] = non-empty iterator
+
+it.next
+// returns: Char = a
+
+it.next
+// returns: Char = b
