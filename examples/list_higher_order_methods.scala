@@ -39,3 +39,15 @@ List.range(1, 5) flatMap (
 // for each i between 1 and 5, and then concatenates all the results. Note that the same list
 // can alternatively be constructed with a for expression:
 for (i <- List.range(1, 5); j <- List.range(1, i)) yield (i, j)
+
+// Another map-like operation is foreach. Unlike map and flatMap, however, foreach
+// takes a procedure (a function with result type Unit) as right operand. It simply applies
+// the procedure to each list element. The result of the operation itself is again Unit;
+// no list of results is assembled. As an example, here is a concise way of summing up all
+// numbers in a list:
+var sum = 0
+// returns: sum: Int = 0
+List(1, 2, 3, 4, 5) foreach (sum += _)
+
+sum
+// returns: Int = 15
