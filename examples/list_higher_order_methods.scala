@@ -51,3 +51,12 @@ List(1, 2, 3, 4, 5) foreach (sum += _)
 
 sum
 // returns: Int = 15
+
+// The operation "xs filter p" takes as operands a list xs of type List[T] and
+// a predicate function p of type T => Boolean. It yields the list of all elements
+// x in xs for which p(x) is true. For instance:
+List(1, 2, 3, 4, 5) filter (_ % 2 == 0)
+// returns: List[Int] = List(2, 4)
+
+words filter (_.length == 3)
+// returns: List[String] = List(the, fox)
