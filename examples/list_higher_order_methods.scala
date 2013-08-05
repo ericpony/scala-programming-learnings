@@ -60,3 +60,13 @@ List(1, 2, 3, 4, 5) filter (_ % 2 == 0)
 
 words filter (_.length == 3)
 // returns: List[String] = List(the, fox)
+
+// The partition method is like filter, but it returns a pair of lists.
+// One list contains all elements for which the predicate is true, while the other list
+// contains all elements for which the predicate is false. It is defined by the equality:
+//
+//  xs partition p equals (xs filter p, xs filter (!p(_)))
+//
+// Here's an example:
+List(1, 2, 3, 4, 5) partition (_ % 2 == 0)
+// returns: (List[Int], List[Int]) = (List(2, 4),List(1, 3, 5))
