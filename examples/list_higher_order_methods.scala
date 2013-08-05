@@ -81,3 +81,14 @@ List(1, 2, 3, 4, 5) find (_ % 2 == 0)
 
 List(1, 2, 3, 4, 5) find (_ <= 0)
 // returns: Option[Int] = None
+
+// The takeWhile and dropWhile operators also take a predicate as their right operand.
+// The operation xs takeWhile p takes the longest prefix of list xs such that every element
+// in the prefix satisfies p. Analogously, the operation xs dropWhile p removes the
+// longest prefix from list xs such that every element in the prefix satisfies p.
+// Here are some examples:
+List(1, 2, 3, -4, 5) takeWhile (_ > 0)
+// returns: List[Int] = List(1, 2, 3)
+
+words dropWhile (_ startsWith "t")
+// returns: List[String] = List(quick, brown, fox)
