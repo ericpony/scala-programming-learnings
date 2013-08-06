@@ -92,3 +92,12 @@ List(1, 2, 3, -4, 5) takeWhile (_ > 0)
 
 words dropWhile (_ startsWith "t")
 // returns: List[String] = List(quick, brown, fox)
+
+// The span method combines takeWhile and dropWhile in one operation, just like splitAt
+// combines take and drop. It returns a pair of two lists, defined by the equality:
+//
+// xs span p equals (xs takeWhile p, xs dropWhile p)
+//
+// Like splitAt, span avoids traversing the list xs twice:
+List(1, 2, 3, -4, 5) span (_ > 0)
+// returns: (List[Int], List[Int]) = (List(1, 2, 3), List(-4, 5))
