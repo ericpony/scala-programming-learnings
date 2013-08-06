@@ -101,3 +101,28 @@ words dropWhile (_ startsWith "t")
 // Like splitAt, span avoids traversing the list xs twice:
 List(1, 2, 3, -4, 5) span (_ > 0)
 // returns: (List[Int], List[Int]) = (List(1, 2, 3), List(-4, 5))
+
+// The operation xs forall p takes as arguments a list xs and a predicate p.
+// Its result is true if all elements in the list satisfy p. Conversely, the operation
+// xs exists p returns true if there is an element in xs that satisfies the predicate p.
+// For instance, to find out whether a matrix represented as a list of lists has
+// a row with only zeroes as elements:
+val diagonalZeroes = List(
+  List(0, 1, 1),
+  List(1, 0, 1),
+  List(1, 1, 0)
+)
+
+val horizontalZeroes = List(
+  List(1, 1, 1),
+  List(0, 0, 0),
+  List(1, 1, 1)
+)
+
+def hasZeroRow(matrix: List[List[Int]]) = matrix exists (row => row forall (_ == 0))
+
+hasZeroRow(diagonalZeroes)
+// returns: Boolean = false
+
+hasZeroRow(horizontalZeroes)
+// returns: Boolean = true
