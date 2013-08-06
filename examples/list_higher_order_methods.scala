@@ -126,3 +126,78 @@ hasZeroRow(diagonalZeroes)
 
 hasZeroRow(horizontalZeroes)
 // returns: Boolean = true
+
+// Another common kind of operation combines the elements of a list with some operator.
+// For instance:
+//
+// sum(List(a, b, c)) equals 0 + a + b + c
+//
+// This is a special instance of a fold operation:
+def sum(xs: List[Int]): Int = (0 /: xs) (_ + _)
+// returns: sum: (xs: List[Int])Int
+
+// Similarly:
+//
+// product(List(a, b, c)) equals 1 * a * b * c
+//
+// is a special instance of this fold operation:
+def product(xs: List[Int]): Int = (1 /: xs) (_ * _)
+// returns: product: (xs: List[Int])Int
+
+// A fold left operation "(z /: xs) (op)" involves three objects: a start value z,
+// a list xs, and a binary operation op. The result of the fold is op applied between
+// successive elements of the list prefixed by z. For instance:
+//
+// (z /: List(a, b, c)) (op) equals op(op(op(z, a), b), c)
+
+// Here’s another example that illustrates how /: is used. To concatenate all words in a
+// list of strings with spaces between them and in front, you can write this:
+("" /: words) (_ + " " + _)
+// returns: String =  " the quick brown fox"
+
+// This gives an extra space at the beginning. To remove the space, you can use this
+// slight variation:
+(words.head /: words.tail)  (_ + " " + _)
+// returns: String = "the quick brown fox"
+
+// The /: operator produces left-leaning operation trees (its syntax with the slash
+// rising forward is intended to be a reflection of that). The operator has :\ as an
+// analog that produces right-leaning trees. For instance:
+//
+// (List(a, b, c) :\ z) (op) equals op(a, op(b, op(c, z)))
+//
+// The :\ operator is pronounced fold right. It involves the same three operands as fold
+// left, but the first two appear in reversed order: The first operand is the list to fold,
+// the second is the start value. For associative operations, fold left and fold right are
+// equivalent, but there might be a difference in efficiency. Consider for instance
+// an operation corresponding to the flatten method, which concatenates all elements
+// in a list of lists. This could be implemented with either fold left or fold right:
+def flattenLeft[T](xss: List[List[T]]) =
+  (List[T]() /: xss) (_ ::: _)
+
+def flattenRight[T](xss: List[List[T]]) =
+  (xss :\ List[T]()) (_ ::: _)
+
+// Because list concatenation, xs ::: ys, takes time proportional to its first argument xs,
+// the implementation in terms of fold right in flattenRight is more efficient than the
+// fold left implementation in flattenLeft. The problem is that flattenLeft(xss) copies
+// the first element list xss.head n − 1 times, where n is the length of the list xss.
+
+// Note that both versions of flatten require a type annotation on the empty list that is
+// the start value of the fold. This is due to a limitation in Scala’s type inferencer,
+// which fails to infer the correct type of the list automatically. If you try to leave
+// out the annotation, you get the following:
+// def flattenRight[T](xss: List[List[T]]) =
+//   (xss :\ List()) (_ ::: _)
+// <console>:8: error: type mismatch;
+//   found   : List[T]
+//   required: List[Nothing]
+//   (xss :\ List()) (_ ::: _)
+//                      ^
+//
+// Lastly, although the /: and :\ operators have the advantage that the direction of the
+// slash resembles the graphical depiction of their respective left or right-leaning trees,
+// and the associativity of the colon character places the start value in the same position
+// in the expression as it is in the tree, some may find the resulting code less than
+// intuitive. If you prefer, you can alternatively use the methods named foldLeft and
+// foldRight, which are also defined on class List.
