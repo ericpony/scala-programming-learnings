@@ -201,3 +201,5 @@ def flattenRight[T](xss: List[List[T]]) =
 // in the expression as it is in the tree, some may find the resulting code less than
 // intuitive. If you prefer, you can alternatively use the methods named foldLeft and
 // foldRight, which are also defined on class List.
+
+def reverseLeft[T](xs: List[T]) = (List[T]() /: xs) { (ys, y) => y :: ys }
