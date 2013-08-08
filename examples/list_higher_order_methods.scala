@@ -203,3 +203,17 @@ def flattenRight[T](xss: List[List[T]]) =
 // foldRight, which are also defined on class List.
 
 def reverseLeft[T](xs: List[T]) = (List[T]() /: xs) { (ys, y) => y :: ys }
+
+// The operation xs sortWith before, where "xs" is a list and "before" is a function that
+// can be used to compare two elements, sorts the elements of list xs. The expression
+// x before y should return true if x should come before y in the intended ordering for
+// the sort. For instance:
+List(1, -3, 4, 2, 6) sortWith (_ < _)
+// returns: List[Int] = List(-3, 1, 2, 4, 6)
+
+words sortWith (_.length > _.length)
+// returns: List[java.lang.String] = List(quick, brown, the, fox)
+
+// Note that sortWith performs a merge sort similar to the merge_sort algorithm shown in
+// merge_sort.scala, but sortWith is a method of class List whereas merge_sort was defined
+// outside lists.
