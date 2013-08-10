@@ -22,3 +22,18 @@ List.range(1, 9, 2)
 // returns: List[Int] = List(1, 3, 5, 7)
 List.range(9, 1, -3)
 // returns: List[Int] = List(9, 6, 3)
+
+// The fill method creates a list consisting of zero or more copies of the same element.
+// It takes two parameters: the length of the list to be created, and the element to be repeated.
+// Each parameter is given in a separate list:
+List.fill(5)('a')
+// returns: List[Char] = List(a, a, a, a, a)
+
+List.fill(3)("hello")
+// returns: List[String] = List(hello, hello, hello)
+
+// If fill is given more than two arguments, then it will make multidimensional lists.
+// That is, it will make lists of lists, lists of lists of lists, etc.
+// The additional arguments go in the first argument list.
+List.fill(2, 3)('b')
+// returns: List[List[Char]] = List(List(b, b, b), List(b, b, b))
