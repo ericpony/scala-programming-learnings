@@ -37,3 +37,15 @@ List.fill(3)("hello")
 // The additional arguments go in the first argument list.
 List.fill(2, 3)('b')
 // returns: List[List[Char]] = List(List(b, b, b), List(b, b, b))
+
+// The tabulate method creates a list whose elements are computed according to a supplied function.
+// Its arguments are just like those of List.fill: the first argument list gives the dimensions
+// of the list to create, and the second describes the elements of the list. The only difference
+// is that instead of the elements being fixed, they are computed from a function:
+val squares = List.tabulate(5)(n => n * n)
+// returns: squares: List[Int] = List(0, 1, 4, 9, 16)
+
+val multiplication = List.tabulate(5,5)(_ * _)
+// returns: multiplication: List[List[Int]] = List(List(0, 0, 0, 0, 0),
+// List(0, 1, 2, 3, 4), List(0, 2, 4, 6, 8), List(0, 3, 6, 9, 12),
+// List(0, 4, 8, 12, 16))
