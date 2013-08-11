@@ -49,3 +49,14 @@ val multiplication = List.tabulate(5,5)(_ * _)
 // returns: multiplication: List[List[Int]] = List(List(0, 0, 0, 0, 0),
 // List(0, 1, 2, 3, 4), List(0, 2, 4, 6, 8), List(0, 3, 6, 9, 12),
 // List(0, 4, 8, 12, 16))
+
+// The concat method concatenates a number of element lists. The lists to be concatenated are
+// supplied as direct arguments to concat:
+List.concat(List('a', 'b'), List('c'))
+// returns: List[Char] = List(a, b, c)
+
+List.concat(List(), List('b'), List('c'))
+// returns : List[Char] = List(b, c)
+
+List.concat()
+// returns: List[Nothing] = List()
