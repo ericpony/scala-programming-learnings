@@ -60,3 +60,21 @@ List.concat(List(), List('b'), List('c'))
 
 List.concat()
 // returns: List[Nothing] = List()
+
+// The zipped method on tuples generalizes several common operations to work on multiple lists
+// instead of just one. One such operation is map. The map method for two zipped lists maps pairs
+// of elements rather than individual elements. One pair is for the first element of each list,
+// another pair is for the second element of each list, and so on—as many pairs as the lists are
+// long. Here is an example of its use:
+(List(10, 20), List(3, 4, 5)).zipped.map(_ * _)
+// returns: List[Int] = List(30, 80)
+
+// Notice that the third element of the second list is discarded. The zipped method zips up only
+// as many elements as appear in all the lists together. Any extra elements on the end are discarded.
+// There are also zipped analogs to exists and forall. They are just like the single-list versions
+// of those methods except they operate on elements from multiple lists instead of just one:
+(List("abc", "de"), List(3, 2)).zipped.forall(_.length == _)
+// returns: Boolean = true
+
+(List("abc", "de"), List(3, 2)).zipped.exists(_.length != _)
+// returns: Boolean = false
