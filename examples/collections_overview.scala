@@ -14,3 +14,19 @@ colors.head
 colors.tail
 // returns: List[String] = List(blue, green)
 
+
+// Arrays allow you to hold a sequence of elements and efficiently access an element at an arbitrary position, both
+// to get or update the element, with a zero-based index. Here’s how you create an array whose size you know, but
+// for which you don’t yet know the element values:
+val fiveInts = new Array[Int](5)
+// returns: fiveInts: Array[Int] = Array(0, 0, 0, 0, 0)
+
+// Here's how you initialize an array when you do know the element values:
+val fiveToOne = Array(5, 4, 3, 2, 1)
+// returns: fiveToOne: Array[Int] = Array(5, 4, 3, 2, 1)
+
+// As mentioned previously, arrays are accessed in Scala by placing an index in parentheses, not square brackets
+// as in Java. Here's an example of both accessing and updating an array element:
+fiveInts(0) = fiveToOne(4)
+fiveInts
+// returns: Array[Int] = Array(1, 0, 0, 0, 0)
