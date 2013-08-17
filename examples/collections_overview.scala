@@ -30,3 +30,35 @@ val fiveToOne = Array(5, 4, 3, 2, 1)
 fiveInts(0) = fiveToOne(4)
 fiveInts
 // returns: Array[Int] = Array(1, 0, 0, 0, 0)
+
+// Class List provides fast access to the head of the list, but not the end. Thus, when you need to build a list
+// by appending to the end, you should consider building the list backwards by prepending elements to the front,
+// then when you’re done, calling reverse to get the elements in the order you need.
+//
+// Another alternative, which avoids the reverse operation, is to use a ListBuffer. A ListBuffer is a mutable object
+// (contained in package scala.collection.mutable), which can help you build lists more effi- ciently when you need
+// to append. ListBuffer provides constant time ap- pend and prepend operations. You append elements with  the +=
+// operator, and prepend them with the +=: operator. When you’re done building, you can obtain a List by invoking
+// toList on the ListBuffer. Here’s an example:
+import scala.collection.mutable.ListBuffer
+val buf = new ListBuffer[Int]
+// returns buf: scala.collection.mutable.ListBuffer[Int] = ListBuffer()
+
+buf += 1
+// returns: buf.type = ListBuffer(1)
+
+buf += 2
+// returns: buf.type = ListBuffer(1, 2)
+
+buf
+// returns: scala.collection.mutable.ListBuffer[Int]  = ListBuffer(1, 2)
+
+3 +=: buf
+// returns: buf.type = ListBuffer(3, 1, 2)
+
+buf.toList
+// returns: List[Int] = List(3, 1, 2)
+
+// Another reason to use ListBuffer instead of List is to prevent the potential for stack overflow. If you can build
+// a list in the desired order by prepending, but the recursive algorithm that would be required is not tail recursive,
+// you can use a for expression or while loop and a ListBuffer instead.
