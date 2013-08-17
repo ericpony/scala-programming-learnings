@@ -62,3 +62,36 @@ buf.toList
 // Another reason to use ListBuffer instead of List is to prevent the potential for stack overflow. If you can build
 // a list in the desired order by prepending, but the recursive algorithm that would be required is not tail recursive,
 // you can use a for expression or while loop and a ListBuffer instead.
+
+// An ArrayBuffer is like an array, except that you can additionally add and remove elements from the beginning and
+// end of the sequence. All Array operations are available, though they are a little slower due to a layer of wrapping
+// in the implementation. The new addition and removal operations are constant time on average, but occasionally require
+// linear time due to the implementation needing to allocate a new array to hold the buffer’s contents.
+//
+// To use an ArrayBuffer, you must first import it from the mutable collections package:
+import scala.collection.mutable.ArrayBuffer
+
+// When you create an ArrayBuffer, you must specify a type parameter, but need not specify a length. The ArrayBuffer
+// will adjust the allocated space automatically as needed:
+
+val arr = new ArrayBuffer[Int]()
+// returns: arr: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
+
+// You can append to an ArrayBuffer using the += method:
+arr += 12
+// returns: arr.type = ArrayBuffer(12)
+
+arr += 15
+// returns: arr.type = ArrayBuffer(12, 15)
+
+arr
+// returns: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(12, 15)
+
+// All the normal array methods are available. For example, you can ask an ArrayBuffer its length, or you can retrieve
+// an element by its index:
+
+arr.length
+// returns: Int = 2
+
+arr(0)
+// returns: Int = 12
