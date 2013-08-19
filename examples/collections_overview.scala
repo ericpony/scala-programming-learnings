@@ -111,3 +111,12 @@ hasUpperCase("e e cummings")
 // Because no method named "exists" is declared in class String itself, the Scala compiler will implicitly convert
 // s to StringOps, which has the method. The exists method treats the string as a sequence of characters, and will
 // return true if any of the characters are upper case.
+
+// If you want to use both mutable and immutable sets or maps in the same source file, one approach is to import
+// the name of the package that contains the mutable variants:
+import scala.collection.mutable
+
+// You can continue to refer to the immutable set as Set, as before, but can now refer to the mutable set as
+// mutable.Set. Here’s an example:
+val mutableSet = mutable.Set(1, 2, 3)
+// returns: mutableSet: scala.collection.mutable.Set[Int] = Set(1, 2, 3)
