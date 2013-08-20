@@ -120,3 +120,39 @@ import scala.collection.mutable
 // mutable.Set. Here’s an example:
 val mutableSet = mutable.Set(1, 2, 3)
 // returns: mutableSet: scala.collection.mutable.Set[Int] = Set(1, 2, 3)
+
+val numbers = Set(1, 2, 3)
+// Creates an immutable set (numbers.toString returns Set(1, 2, 3))
+
+numbers+5
+// Adds an element (returns Set(1, 2, 3, 5))
+
+numbers-3
+// Removes an element (returns Set(1, 2))
+
+numbers ++ List(5, 6)
+// Adds multiple elements (returns Set(1, 2, 3, 5, 6))
+
+numbers -- List(1, 2)
+// Removes multiple elements (returns Set(3))
+
+numbers & Set(1, 3, 5, 7)
+// Takes the intersection of two sets (returns Set(1, 3))
+
+numbers.size
+// Returns the size of the set (returns 3)
+
+numbers.contains(3)
+// Checks for inclusion (returns true)
+
+import scala.collection.mutable
+// Makes the mutable collections easy to access
+
+val words = mutable.Set.empty[String]
+// Creates an empty, mutable set (words.toString returns Set())
+
+words += "the"
+// Adds an element (words.toString returns Set(the))
+
+words -= "the"
+// Removes an element, if it exists (words.toString returns Set())
