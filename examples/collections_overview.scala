@@ -156,3 +156,13 @@ words += "the"
 
 words -= "the"
 // Removes an element, if it exists (words.toString returns Set())
+
+words ++= List("do", "re", "mi")
+// Adds multiple elements (words.toString returns Set(do, re, mi))
+
+words --= List("do", "re")
+// Removes multiple elements (words.toString returns Set(mi))
+
+words.clear
+// Removes all elements (words.toString returns Set())
+￼
