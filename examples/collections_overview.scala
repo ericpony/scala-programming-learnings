@@ -166,3 +166,40 @@ words --= List("do", "re")
 words.clear
 // Removes all elements (words.toString returns Set())
 ￼
+// Maps let you associate a value with each element of the collection. Using a map looks similar to using an array,
+// except that instead of indexing with integers counting from 0, you can use any kind of key. If you import
+// the scala.collection.mutable package, you can create an empty mutable map like this:
+val map = mutable.Map.empty[String, Int]
+// returns: map: scala.collection.mutable.Map[String,Int] = Map()
+
+// Note that when you create a map, you must specify two types. The first type is for the keys of the map, the second
+// for the values. In this case, the keys are strings and the values are integers. Setting entries in a map looks
+// similar to setting entries in an array:
+map("hello") = 1
+map("there") = 2
+map
+// returns: scala.collection.mutable.Map[String,Int] = Map(hello -> 1, there -> 2)
+
+// Likewise, reading a map is similar to reading an array:
+map("hello")
+// returns: Int = 1
+
+// Putting it all together, here is a method that counts the number of times each word occurs in a string:
+def countWords(text: String) = {
+  val counts = mutable.Map.empty[String, Int]
+  for (rawWord <- text.split("[ ,!.]+")) {
+    val word = rawWord.toLowerCase
+    val oldCount = if (counts.contains(word)) counts(word) else 0
+    counts += (word -> (oldCount + 1))
+  }
+  counts
+}
+
+countWords("See Spot run! Run, Spot. Run!")
+// returns: scala.collection.mutable.Map[String,Int] = Map(spot -> 2, see -> 1, run -> 3)
+
+// Given these counts, you can see that this text talks a lot about running, but not so much about seeing.
+// The way this code works is that a mutable map, named counts, maps each word to the number of times it occurs
+// in the text. For each word in the text, the word’s old count is looked up, that count is incremented by one,
+// and the new count is saved back into counts. Note the use of contains to check whether a word has been seen
+// yet or not. If counts.contains(word) is not true, then the word has not yet been seen and zero is used for the count.
