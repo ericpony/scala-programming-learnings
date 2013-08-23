@@ -203,3 +203,29 @@ countWords("See Spot run! Run, Spot. Run!")
 // in the text. For each word in the text, the word’s old count is looked up, that count is incremented by one,
 // and the new count is saved back into counts. Note the use of contains to check whether a word has been seen
 // yet or not. If counts.contains(word) is not true, then the word has not yet been seen and zero is used for the count.
+
+// Many of the most commonly used methods on both mutable and immutable maps are shown here:
+
+val numbersMap = Map("i" -> 1, "ii" -> 2)
+// Creates an immutable map (numbersMap.toString returns Map(i -> 1, ii -> 2))
+
+numbersMap + ("vi" -> 6)
+// Adds an entry (returns Map(i -> 1, ii -> 2, vi -> 6))
+
+numbersMap - "ii"
+// Removes an entry (returns Map(i -> 1))
+
+numbersMap ++ List("iii" -> 3, "v" -> 5)
+// Adds multiple entries (returns Map(i -> 1, ii -> 2, iii -> 3, v -> 5))
+
+numbersMap -- List("i", "ii")
+// Removes multiple entries (returns Map())
+
+numbersMap.size
+// Returns the size of the map (returns 2)
+
+numbersMap.contains("ii")
+// Checks for inclusion (returns true)
+
+numbersMap("ii")
+// Retrieves the value at a specified key (returns 2)
