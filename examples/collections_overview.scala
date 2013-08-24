@@ -229,3 +229,33 @@ numbersMap.contains("ii")
 
 numbersMap("ii")
 // Retrieves the value at a specified key (returns 2)
+
+numbersMap.keys
+// Returns the keys (returns an Iterable over the strings "i" and "ii")
+
+numbersMap.keySet
+// Returns the keys as a set (returns Set(i, ii))
+
+numbersMap.values
+// Returns the values (returns an Iterable over the integers 1 and 2)
+
+numbersMap.isEmpty
+// Indicates whether the map is empty (returns false)
+
+import scala.collection.mutable
+// Makes the mutable collections easy to access
+
+val wordsMap = mutable.Map.empty[String, Int]
+// Creates an empty, mutable map
+
+wordsMap += ("one" -> 1)
+// Adds a map entry from "one" to 1 (wordsMap.toString returns Map(one -> 1))
+
+wordsMap -= "one"
+// Removes a map entry, if it exists (wordsMap.toString returns Map())
+
+wordsMap ++= List("one" -> 1, "two" -> 2, "three" -> 3)
+// Adds multiple map entries (wordsMap.toString returns Map(one -> 1, two -> 2, three -> 3))
+
+wordsMap --= List("one", "two")
+// Removes multiple objects (wordsMap.toString returns Map(three -> 3))
