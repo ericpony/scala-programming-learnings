@@ -145,7 +145,6 @@ numbers.size
 numbers.contains(3)
 // Checks for inclusion (returns true)
 
-import scala.collection.mutable
 // Makes the mutable collections easy to access
 
 val words = mutable.Set.empty[String]
@@ -259,3 +258,20 @@ wordsMap ++= List("one" -> 1, "two" -> 2, "three" -> 3)
 
 wordsMap --= List("one", "two")
 // Removes multiple objects (wordsMap.toString returns Map(three -> 3))
+
+// Here are some examples of TreeSet, which is the implementation of OrderedSet:
+import scala.collection.immutable.TreeSet
+val ts = TreeSet(9, 3, 1, 8, 0, 2, 7, 4, 6, 5)
+// returns: ts: scala.collection.immutable.TreeSet[Int] = TreeSet(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+val cs = TreeSet('f', 'u', 'n')
+// returns cs: scala.collection.immutable.TreeSet[Char] = TreeSet(f, n, u)
+
+// And here are a few TreeMap examples, which is the implementation of OrderedMap:
+import scala.collection.immutable.TreeMap
+var tm = TreeMap(3 -> 'x', 1 -> 'x', 4 -> 'x')
+// returns: tm: scala.collection.immutable.TreeMap[Int,Char] = Map(1 -> x, 3 -> x, 4 -> x)
+tm += (2 -> 'x')
+
+tm
+// returns: scala.collection.immutable.TreeMap[Int,Char] = Map(1 -> x, 2 -> x, 3 -> x, 4 -> x)
