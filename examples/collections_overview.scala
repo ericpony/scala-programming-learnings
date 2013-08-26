@@ -275,3 +275,26 @@ tm += (2 -> 'x')
 
 tm
 // returns: scala.collection.immutable.TreeMap[Int,Char] = Map(1 -> x, 2 -> x, 3 -> x, 4 -> x)
+
+// To make it easier to switch from immutable to mutable collections, and vice versa, Scala used to provide
+// some syntactic sugar. Even though immutable sets and maps do not support a true += method, Scala gave
+// a useful alternate interpretation to +=. Whenever you wrote a += b, and a did not support a method named +=,
+// Scala used to try interpreting it as a = a + b. For example, immutable sets do not support a += operator:
+
+val people = Set("Nancy", "Jane")
+// returns: people: scala.collection.immutable.Set[String] = Set(Nancy, Jane)
+
+people += "Bob"
+// error: value += is not a member of scala.collection.immutable.Set[String]
+// people += "Bob"
+//        ^
+
+// If you declare people as a var, instead of a val, however, then the collection can be “updated” with a += operation,
+// even though it is immutable. First, a new collection will be created, and then people will be reassigned to refer
+// to the new collection:
+
+var mutablePeople = Set("Nancy", "Jane")
+// returns: mutablePeople: scala.collection.immutable.Set[String] = Set(Nancy, Jane)
+
+mutablePeople += "Bob"
+// returns: mutablePeople: scala.collection.immutable.Set[String] = Set(Nancy, Jane, Bob)
