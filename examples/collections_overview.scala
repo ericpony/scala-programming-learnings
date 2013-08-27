@@ -298,3 +298,29 @@ var mutablePeople = Set("Nancy", "Jane")
 
 mutablePeople += "Bob"
 // returns: mutablePeople: scala.collection.immutable.Set[String] = Set(Nancy, Jane, Bob)
+
+// After this series of statements, the people variable refers to a new immutable set, which contains the added string,
+// "Bob". The same idea applies to any method ending in =, not just the += method. Here’s the same syntax used with
+// the -= operator, which removes an element from a set, and the ++= operator, which adds a collection of elements
+// to a set:
+
+mutablePeople -= "Jane"
+mutablePeople ++= List("Tom", "Harry")
+mutablePeople
+// returns: scala.collection.immutable.Set[String] = Set(Nancy, Bob, Tom, Harry)
+
+// To see how this is useful, consider again the following Map example from earlier:
+var capital = Map("US" -> "Washington", "France" -> "Paris")
+capital += ("Japan" -> "Tokyo")
+println(capital("France"))
+
+// This code uses immutable collections. If you want to try using mutable col- lections instead,
+// all that is necessary is to import the mutable version of Map, thus overriding the default
+// import of the immutable Map:
+import scala.collection.mutable.Map  // only change needed!
+var mutableCapital = Map("US" -> "Washington", "France" -> "Paris")
+mutableCapital += ("Japan" -> "Tokyo")
+println(mutableCapital("France"))
+
+// Not all examples are quite that easy to convert, but the special treatment of methods ending in an equals sign
+// will often reduce the amount of code that needs changing.
