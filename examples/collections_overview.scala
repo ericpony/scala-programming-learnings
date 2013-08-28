@@ -338,3 +338,24 @@ roughlyPi
 
 // The effect of this expansion is similar to Java's assignment operators +=, -=, *=, etc., but it is more general
 // because every operator ending in = can be converted.
+
+// Sometimes, you need to specify the type of the collection you want, when the compiler would choose a different type
+// than what you intended.
+val stuff = mutable.Set(42)
+// returns: stuff: scala.collection.mutable.Set[Int] = Set(42)
+
+
+// Suppose you wanted to add a string to this Set of stuff, now you couldn't:
+stuff += "blah"
+// <console>:11: error: type mismatch;
+//   found   : String("blah")
+//   required: Int
+//   stuff += "blah"
+
+// The problem here is that stuff was given an element type of Int. If you want it to have an element type of Any,
+// you need to say so explicitly by putting the element type in square brackets, like this:
+
+val anyStuff = mutable.Set[Any](42)
+anyStuff += "blah"
+anyStuff
+// returns: anyStuff.type = Set(blah, 42)
