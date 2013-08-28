@@ -324,3 +324,17 @@ println(mutableCapital("France"))
 
 // Not all examples are quite that easy to convert, but the special treatment of methods ending in an equals sign
 // will often reduce the amount of code that needs changing.
+
+// By the way, this syntactic treatment works on any kind of value, not just collections. For example,
+// here it is being used on floating-point numbers:
+
+var roughlyPi = 3.0
+// returns: roughlyPi: Double = 3.0
+
+roughlyPi += 0.1
+roughlyPi += 0.04
+roughlyPi
+// returns: Double = 3.14
+
+// The effect of this expansion is similar to Java's assignment operators +=, -=, *=, etc., but it is more general
+// because every operator ending in = can be converted.
