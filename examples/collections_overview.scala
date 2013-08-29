@@ -359,3 +359,22 @@ val anyStuff = mutable.Set[Any](42)
 anyStuff += "blah"
 anyStuff
 // returns: anyStuff.type = Set(blah, 42)
+
+// Another special situation is if you want to initialize a collection with another collection.
+// For example, imagine you have a list, but you want a TreeSet containing the elements in the list. Here’s the list:
+val someColors = List("blue", "yellow", "red", "green")
+// someColors: List[String] = List(blue, yellow, red, green)
+
+// You cannot pass the colors list to the factory method for TreeSet:
+
+import scala.collection.immutable.TreeSet
+val colorsSet = TreeSet(someColors)
+// <console>:11: error: No implicit Ordering defined for List[String].
+// val colorsSet = TreeSet(someColors)
+//                        ^
+
+// Instead, you’ll need to create an empty TreeSet[String] and add to it the elements of the list
+// with the TreeSet’s ++ operator:
+
+val treeSet = TreeSet[String]() ++ someColors
+// returns treeSet: scala.collection.immutable.TreeSet[String] = TreeSet(blue, green, red, yellow)
