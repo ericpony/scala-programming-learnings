@@ -378,3 +378,24 @@ val colorsSet = TreeSet(someColors)
 
 val treeSet = TreeSet[String]() ++ someColors
 // returns treeSet: scala.collection.immutable.TreeSet[String] = TreeSet(blue, green, red, yellow)
+
+// If you need to initialize a list or array with another collection, on the other hand, it is quite straightforward.
+// As you’ve seen previously, to initialize a new list with another collection, simply invoke toList on that collection:
+treeSet.toList
+// returns: List[String] = List(blue, green, red, yellow)
+
+// Or, if you need an array, invoke toArray:
+treeSet.toArray
+// returns: Array[String] = Array(blue, green, red, yellow)
+
+// Note that although the original colors list was not sorted, the elements in the list produced by invoking toList
+// on the TreeSet are in alphabetical order. When you invoke toList or toArray on a collection, the order
+// of the elements in the resulting list or array will be the same as the order of elements produced by an iterator
+// obtained by invoking elements on that collection. Because a TreeSet[String]’s iterator will produce strings in
+// alphabetical order, those strings will appear in alphabetical order in the list resulting from invoking toList
+// on that TreeSet.
+//
+// Keep in mind, however, that conversion to lists or arrays usually requires copying all of the elements of
+// the collection, and thus may be slow for large collections. Sometimes you need to do it, though,
+// due to an existing API. Further, many collections only have a few elements anyway, in which case there is
+// only a small speed penalty.
