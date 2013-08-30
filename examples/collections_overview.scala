@@ -399,3 +399,26 @@ treeSet.toArray
 // the collection, and thus may be slow for large collections. Sometimes you need to do it, though,
 // due to an existing API. Further, many collections only have a few elements anyway, in which case there is
 // only a small speed penalty.
+
+// Another situation that arises occasionally is the need to convert a mutable set or map to an immutable one,
+// or vice versa. To accomplish this, you can use the technique shown on the previous page to initialize a TreeSet
+// with the elements of a list. Create a collection of the new type using the empty method and then add the new
+// elements using either ++ or ++=, whichever is appropriate for the target collection type. Here’s how you'd convert
+// the immutable TreeSet from the previous example to a mutable set, and back again to an immutable one:
+import scala.collection.mutable
+treeSet
+// returns: scala.collection.immutable.TreeSet[String] = TreeSet(blue, green, red, yellow)
+
+val mutatableSet = mutable.Set.empty ++= treeSet
+// returns: mutatableSet: scala.collection.mutable.Set[String] = Set(yellow, blue, red, green)
+
+val immutableSet = Set.empty ++ mutatableSet
+// returns: immutableSet: scala.collection.immutable.Set[String] = Set(yellow, blue, red, green)
+
+// You can use the same technique to convert between mutable and immutable maps:
+
+val mutableMap = mutable.Map("i" -> 1, "ii" -> 2)
+// returns mutableMap: scala.collection.mutable.Map[java.lang.String,Int] = Map(ii -> 2, i -> 1)
+
+val immutableMap = Map.empty ++ mutableMap
+// returns: immutableMap: scala.collection.immutable.Map[java.lang.String,Int] = Map(ii -> 2, i -> 1)
