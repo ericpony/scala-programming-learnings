@@ -36,8 +36,8 @@ fiveInts
 // then when you’re done, calling reverse to get the elements in the order you need.
 //
 // Another alternative, which avoids the reverse operation, is to use a ListBuffer. A ListBuffer is a mutable object
-// (contained in package scala.collection.mutable), which can help you build lists more effi- ciently when you need
-// to append. ListBuffer provides constant time ap- pend and prepend operations. You append elements with  the +=
+// (contained in package scala.collection.mutable), which can help you build lists more efficiently when you need
+// to append. ListBuffer provides constant time append and prepend operations. You append elements with  the +=
 // operator, and prepend them with the +=: operator. When you’re done building, you can obtain a List by invoking
 // toList on the ListBuffer. Here’s an example:
 import scala.collection.mutable.ListBuffer
@@ -314,7 +314,7 @@ var capital = Map("US" -> "Washington", "France" -> "Paris")
 capital += ("Japan" -> "Tokyo")
 println(capital("France"))
 
-// This code uses immutable collections. If you want to try using mutable col- lections instead,
+// This code uses immutable collections. If you want to try using mutable collections instead,
 // all that is necessary is to import the mutable version of Map, thus overriding the default
 // import of the immutable Map:
 import scala.collection.mutable.Map  // only change needed!
