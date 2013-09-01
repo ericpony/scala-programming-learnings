@@ -422,3 +422,60 @@ val mutableMap = mutable.Map("i" -> 1, "ii" -> 2)
 
 val immutableMap = Map.empty ++ mutableMap
 // returns: immutableMap: scala.collection.immutable.Map[java.lang.String,Int] = Map(ii -> 2, i -> 1)
+
+// As described earlier, a tuple combines a fixed number of items together so that they can be passed around as a whole.
+// Unlike an array or list, a tuple can hold objects with different types. Here is an example of a tuple holding an
+// integer, a string, and the console:
+(1, "hello", Console)
+
+// Because tuples can combine objects of different types, tuples do not inherit from Traversable. If you find yourself
+// wanting to group exactly one integer and exactly one string, then you want a tuple, not a List or Array.
+// A common application of tuples is returning multiple values from a method. For example, here is a method that finds
+// the longest word in a collection and also returns its index:
+def longestWord(words: Array[String]) = {
+  var word = words(0)
+  var idx = 0
+  for (i <- 1 until words.length)
+    if (words(i).length > word.length) {
+      word = words(i)
+      idx = i
+    }
+  (word, idx)
+}
+
+// Here is an example use of the method:
+val longest = longestWord("The quick brown fox".split(" "))
+// returns: longest: (String, Int) = (quick,1)
+
+// The longestWord function here computes two items: word, the longest word in the array, and idx,
+// the index of that word. To keep things simple, the function assumes there is at least one word in the list,
+// and it breaks ties by choosing the word that comes earlier in the list. Once the function has chosen which word
+// and index to return, it returns both of them together using the tuple syntax (word, idx).
+// To access elements of a tuple, you can use method _1 to access the first element, _2 to access the second, and so on:
+
+longest._1
+// returns: String = quick
+
+longest._2
+// returns: Int = 1
+
+// Additionally, you can assign each element of the tuple to its own variable, like this:
+val (word, idx) = longest
+// returns: word: String = quick
+//          idx: Int = 1
+
+word
+// returns: String = quick
+
+idx
+// returns: Int = 1
+
+// By the way, if you leave off the parentheses you get a different result:
+val anotherWord, anotherIdx = longest
+// returns: word: (String, Int) = (quick,1)
+//          idx: (String, Int) = (quick,1)
+
+// This syntax gives multiple definitions of the same expression. Each variable is initialized with its own evaluation
+// of the expression on the right-hand side. That the expression evaluates to a tuple in this case does not matter.
+// Both variables are initialized to the tuple in its entirety. Soon we will see some examples where multiple definitions
+// are convenient.
