@@ -478,4 +478,7 @@ val anotherWord, anotherIdx = longest
 // This syntax gives multiple definitions of the same expression. Each variable is initialized with its own evaluation
 // of the expression on the right-hand side. That the expression evaluates to a tuple in this case does not matter.
 // Both variables are initialized to the tuple in its entirety. Soon we will see some examples where multiple definitions
-// are convenient.
+// are convenient. However, whenever the combination has some meaning, or you want to add some methods to the combination,
+// it is better to go ahead and create a class. For example, do not use a 3-tuple for the combination of a month, a day,
+// and a year. Make a Date class. It makes your intentions explicit, which both clears up the code for human readers
+// and gives the compiler and language opportunities to help you catch mistakes.
