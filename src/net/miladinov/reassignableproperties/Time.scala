@@ -24,3 +24,26 @@ class TimeEquivalent {
 // In Scala, every var that is a non-private member of some object implicitly defines a getter
 // and a setter method with it. These getters and setters are named differently from the Java
 // convention, however. The getter of a var x is just named "x", while its setter is named "x_=".
+
+// An interesting aspect about this expansion of vars into getters and setters is that you can
+// also choose to define a getter and a setter directly instead of defining a var. By defining
+// these access methods directly you can interpret the operations of variable access and variable
+// assignment as you like. For instance, this next version of the Time class contains
+// requirements that catch all assignments to hour and minute with illegal values.
+
+class TimeWithSetterInvariants {
+  private[this] var h = 12
+  private[this] var m = 0
+
+  def hour: Int = h
+  def hour_= (x: Int) {
+    require(0 <= x && x < 24)
+    h = x
+  }
+
+  def minute: Int = m
+  def minute_= (x: Int) {
+    require(0 <= x && x < 60)
+    m = x
+  }
+}
