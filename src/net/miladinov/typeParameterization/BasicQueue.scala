@@ -1,5 +1,9 @@
 package net.miladinov.typeParameterization
 
+object BasicQueue {
+  def apply[T](elements: T*) = new BasicQueue(elements.toList, Nil)
+}
+
 class BasicQueue[T] private (
   private val leading: List[T],
   private val trailing: List[T]
