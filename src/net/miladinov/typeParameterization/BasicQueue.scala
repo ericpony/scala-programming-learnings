@@ -1,6 +1,6 @@
 package net.miladinov.typeParameterization
 
-class BasicQueue[T](
+class BasicQueue[T] private (
   private val leading: List[T],
   private val trailing: List[T]
 ) extends FunctionalQueue[T] {
