@@ -8,5 +8,5 @@ package net.miladinov.typeParameterization
 class SlowHeadQueue[T](elements: List[T]) extends FunctionalQueue[T] {
   def head: T = elements.last
   def tail: FunctionalQueue[T] = new SlowHeadQueue[T](elements.init)
-  def enqueue(element: T): FunctionalQueue[T] = new SlowHeadQueue[T](element :: elements)
+  def enqueue[U >: T](element: U): FunctionalQueue[U] = new SlowHeadQueue[U](element :: elements)
 }

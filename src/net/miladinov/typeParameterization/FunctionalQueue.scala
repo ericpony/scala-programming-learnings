@@ -1,7 +1,7 @@
 package net.miladinov.typeParameterization
 
 // A functional queue is a data structure with three operations:
-trait FunctionalQueue[T] {
+trait FunctionalQueue[+T] {
   // Returns the first element of the queue
   def head: T
 
@@ -9,7 +9,7 @@ trait FunctionalQueue[T] {
   def tail: FunctionalQueue[T]
 
   // Returns a new queue with a given element appended at the end
-  def enqueue(element: T): FunctionalQueue[T]
+  def enqueue[U >: T](element: U): FunctionalQueue[U]
 }
 
 // Unlike a mutable queue, a functional queue does not change its contents when
