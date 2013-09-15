@@ -6,8 +6,19 @@ package net.miladinov.abstractMembers
 // parameterizing a trait works via abstract vals that are implemented in subclasses. As an example,
 // consider a reformulation of class Rational from earlier, as a trait:
 trait RationalTrait {
-  val numerator: Int
-  val denominator: Int
+  val n: Int
+  val d: Int
+
+  require(d != 0)
+
+  private val g = gcd(n, d)
+  val numerator = n / g
+  val denominator = d / g
+
+  private def gcd(a: Int, b: Int): Int =
+    if (b == 0) a else gcd(b, a % b)
+
+  override def toString: String = s"$numerator / $denominator"
 }
 
 // The Rational class had two parameters: n for the numerator of the rational number,
