@@ -57,3 +57,16 @@ new RationalTrait {
 // a selection of either value would yield the default value for type Int, 0). For the definition
 // of RationalTrait given previously, this is not a problem, because the trait's initialization does
 // not make use of values numerator or denominator.
+
+/*
+You can use pre-initialized fields in an anonymous class expression to initialize the subclass before
+the superclass is called, like so:
+
+val y = 3
+
+new {
+  val numerator = 1 * x
+  val denominator = 2 * x
+} with RationalTrait
+
+ */
