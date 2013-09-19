@@ -28,5 +28,10 @@ abstract class StructuralSubtyping {
   }
 
   // How would we implement using?
-  def using(thing: AnyRef)(operation: AnyRef => Any): Any
+  // def using(thing: AnyRef)(operation: AnyRef => Any): Any
+  def using[T, S] (thing: T)(operation: T => S) = {
+    val result = operation(thing)
+    thing.close() // Type error!
+    result
+  }
 }
