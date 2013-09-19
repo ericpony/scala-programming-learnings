@@ -2,9 +2,9 @@ package net.miladinov.abstractMembers
 
 import java.io.PrintWriter
 import java.util.Date
-import java.net.{Socket, ServerSocket}
+import java.net.ServerSocket
 
-abstract class StructuralSubtyping {
+class StructuralSubtyping {
 
   def main(args: Array[String]) {
     // Suppose we wanted to generalize the loan pattern to group together a bunch of code
@@ -16,14 +16,14 @@ abstract class StructuralSubtyping {
     // One caller using our code might want to use using like this, to clean up an open file:
     using(new PrintWriter("dates.txt")) { writer =>
       // cast to PrintWriter for now to pass type-check
-      writer.asInstanceOf[PrintWriter].println(new Date)
+      writer.println(new Date)
     }
 
     // Another caller, meanwhile, might want to clean up an open socket:
     val serverSocket: ServerSocket = new ServerSocket
 
     using(serverSocket.accept()) { socket =>
-      socket.asInstanceOf[Socket].getOutputStream().write("howdy, planet!\n".getBytes)
+      socket.getOutputStream().write("howdy, planet!\n".getBytes)
     }
   }
 
