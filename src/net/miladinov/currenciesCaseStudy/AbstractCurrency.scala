@@ -9,10 +9,10 @@ package net.miladinov.currenciesCaseStudy
 
 // These thoughts lead to the following first design for a currency class:
 // A first (faulty) design of the Currency class
-abstract class Currency {
+abstract class AbstractCurrency {
   val amount: Long
   def designation: String
   override def toString = s"$amount $designation"
-  def + (that: Currency): Currency
-  def * (x: Double): Currency
+  def + (that: AbstractCurrency): AbstractCurrency
+  def * (x: Double): AbstractCurrency
 }
