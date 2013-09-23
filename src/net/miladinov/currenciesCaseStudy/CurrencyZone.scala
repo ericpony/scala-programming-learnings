@@ -8,10 +8,15 @@ abstract class CurrencyZone {
   abstract class AbstractCurrency {
     val amount: Long
     def designation: String
-    override def toString = s"$amount $designation"
+    override def toString: String = {
+      ((amount.toDouble / CurrencyUnit.amount.toDouble)
+        formatted ("%." + decimals(CurrencyUnit.amount) + "f") + " " + designation)
+    }
     def + (that: Currency): Currency =
       make(this.amount + that.amount)
     def * (x: Double): Currency =
       make((this.amount * x).toLong)
+    private def decimals(n: Long): Int =
+      if (n == 1) 0 else 1 + decimals(n / 10)
   }
 }
