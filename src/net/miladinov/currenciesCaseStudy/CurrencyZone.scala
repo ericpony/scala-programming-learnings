@@ -2,6 +2,7 @@ package net.miladinov.currenciesCaseStudy
 
 abstract class CurrencyZone {
   type Currency <: AbstractCurrency
+  val CurrencyUnit: Currency
   def make(x: Long): Currency
 
   abstract class AbstractCurrency {
