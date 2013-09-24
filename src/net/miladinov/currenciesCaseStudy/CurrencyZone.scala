@@ -24,5 +24,10 @@ abstract class CurrencyZone {
       this.amount.toDouble / that.amount
     private def decimals (n: Long): Int =
       if (n == 1) 0 else 1 + decimals(n / 10)
+
+    def from (other: CurrencyZone#AbstractCurrency): Currency =
+      make(math.round(
+        other.amount.toDouble * Converter.exchangeRate
+          (other.designation)(this.designation)))
   }
 }
