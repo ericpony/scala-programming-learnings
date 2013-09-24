@@ -16,7 +16,7 @@ abstract class CurrencyZone {
       make(this.amount + that.amount)
     def * (x: Double): Currency =
       make((this.amount * x).toLong)
-    private def decimals(n: Long): Int =
+    private def decimals (n: Long): Int =
       if (n == 1) 0 else 1 + decimals(n / 10)
   }
 }
