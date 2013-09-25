@@ -2,6 +2,7 @@ package net.miladinov.simulation
 
 abstract class Simulation {
   type Action = () => Unit
+
   case class WorkItem(time: Int, action: Action)
 
   private var curTime = 0
@@ -18,7 +19,7 @@ abstract class Simulation {
     afterDelay(0) {
       println(s"*** simulation started, time = $currentTime ***")
     }
-    while (! agenda.isEmpty) next()
+    while (!agenda.isEmpty) next()
   }
 
   private def insert(ag: List[WorkItem], item: WorkItem): List[WorkItem] = {

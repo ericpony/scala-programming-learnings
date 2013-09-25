@@ -4,7 +4,7 @@ object PatternMatchExamples {
   def wildcardPattern(expr: Expression) = {
     expr match {
       case BinaryOperator(op, left, right) =>
-        println(expr +" is a binary operation")
+        println(expr + " is a binary operation")
       case _ =>
     }
   }
@@ -121,7 +121,7 @@ object PatternMatchExamples {
 
   def variableBindingPattern(expr: Any) = {
     expr match {
-      case UnaryOperator("abs", e @ UnaryOperator("abs", _)) => e
+      case UnaryOperator("abs", e@UnaryOperator("abs", _)) => e
       case _ =>
     }
   }

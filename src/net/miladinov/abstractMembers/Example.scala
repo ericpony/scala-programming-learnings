@@ -4,7 +4,9 @@ package net.miladinov.abstractMembers
 // type (T), method (transform), val (initial), and var (current):
 trait Abstract {
   type T
+
   def transform(x: T): T
+
   val initial: T
   var current: T
 }
@@ -13,7 +15,9 @@ trait Abstract {
 // of its abstract members. Here is an example implementation that provides these definitions:
 class Concrete extends Abstract {
   type T = String
+
   def transform(x: String) = x + x
+
   val initial = "hi"
   var current = initial
 }

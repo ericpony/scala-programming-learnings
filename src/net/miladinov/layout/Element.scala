@@ -3,13 +3,16 @@ package net.miladinov.layout
 import Element.elem
 
 object Element {
+
   private class ArrayElement(
     val contents: Array[String]
   ) extends Element
 
   private class LineElement(s: String) extends Element {
     val contents = Array(s)
+
     override def width: Int = s.length
+
     override def height: Int = 1
   }
 
@@ -21,6 +24,7 @@ object Element {
     if (width < 1)
       throw new IllegalArgumentException("width must be positive")
     private val line = ch.toString * width
+
     def contents = Array.fill(height)(line)
   }
 
@@ -36,7 +40,9 @@ object Element {
 
 abstract class Element {
   def contents: Array[String]
+
   def height: Int = contents.length
+
   def width: Int = contents(0).length
 
   def above(that: Element): Element = {

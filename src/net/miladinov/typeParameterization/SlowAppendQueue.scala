@@ -21,6 +21,8 @@ package net.miladinov.typeParameterization
 
 class SlowAppendQueue[T](elements: List[T]) extends FunctionalQueue[T] {
   def head: T = elements.head
+
   def tail: SlowAppendQueue[T] = new SlowAppendQueue[T](elements.tail)
+
   def enqueue[U >: T](element: U): FunctionalQueue[U] = new SlowAppendQueue[U](elements ::: List(element))
 }

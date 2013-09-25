@@ -1,7 +1,9 @@
 package net.miladinov.abstractMembers
 
 abstract class Fruit {
-  val v: String // v for val
+  val v: String
+
+  // v for val
   def m: String // m for method
 }
 

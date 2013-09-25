@@ -1,6 +1,7 @@
 package net.miladinov.varianceAnnotations
 
 class Publication(val title: String)
+
 class Book(title: String) extends Publication(title)
 
 object Library {
@@ -16,6 +17,7 @@ object Library {
 
 object Customer extends App {
   def getTitle(p: Publication): String = p.title
+
   Library.printBookList(getTitle)
 }
 

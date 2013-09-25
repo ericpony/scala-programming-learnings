@@ -2,7 +2,9 @@ package net.miladinov.simulation
 
 abstract class BasicCircuitSimulation extends Simulation {
   def InverterDelay: Int
+
   def AndGateDelay: Int
+
   def OrGateDelay: Int
 
   class Wire {
@@ -10,10 +12,11 @@ abstract class BasicCircuitSimulation extends Simulation {
     private var actions: List[Action] = List()
 
     def getSignal = signalVal
+
     def setSignal(s: Boolean) =
       if (s != signalVal) {
         signalVal = s
-        actions foreach (_ ())
+        actions foreach (_())
       }
 
     def addAction(a: Action) = {
@@ -37,7 +40,7 @@ abstract class BasicCircuitSimulation extends Simulation {
       val a1Signal = a1.getSignal
       val a2Signal = a2.getSignal
       afterDelay(AndGateDelay) {
-        output setSignal(a1Signal & a2Signal)
+        output setSignal (a1Signal & a2Signal)
       }
     }
     a1 addAction andAction
@@ -49,7 +52,7 @@ abstract class BasicCircuitSimulation extends Simulation {
       val o1Signal = o1.getSignal
       val o2Signal = o2.getSignal
       afterDelay(OrGateDelay) {
-        output setSignal(o1Signal & o2Signal)
+        output setSignal (o1Signal & o2Signal)
       }
     }
     o1 addAction orAction

@@ -18,6 +18,6 @@ package net.miladinov.abstractMembers
 // Given this type, we can now write the pasture class like this:
 
 class Pasture {
-  var animals: List[Animal { type SuitableFood = Grass }] = Nil
+  var animals: List[Animal {type SuitableFood = Grass}] = Nil
   // ...
 }

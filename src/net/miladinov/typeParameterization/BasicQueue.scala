@@ -26,6 +26,7 @@ object BasicQueue {
       new ImprovedBasicQueueImplementation(leading.tail, trailing)
     }
 
-    def enqueue[U >: T](element: U): FunctionalQueue[U] =  new ImprovedBasicQueueImplementation[U](leading, element :: trailing)
+    def enqueue[U >: T](element: U): FunctionalQueue[U] = new ImprovedBasicQueueImplementation[U](leading, element :: trailing)
   }
+
 }

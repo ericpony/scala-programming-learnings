@@ -14,16 +14,18 @@ class StructuralSubtyping {
     // this class. We'll define it later.
 
     // One caller using our code might want to use using like this, to clean up an open file:
-    using(new PrintWriter("dates.txt")) { writer =>
+    using(new PrintWriter("dates.txt")) {
+      writer =>
       // cast to PrintWriter for now to pass type-check
-      writer.println(new Date)
+        writer.println(new Date)
     }
 
     // Another caller, meanwhile, might want to clean up an open socket:
     val serverSocket: ServerSocket = new ServerSocket
 
-    using(serverSocket.accept()) { socket =>
-      socket.getOutputStream().write("howdy, planet!\n".getBytes)
+    using(serverSocket.accept()) {
+      socket =>
+        socket.getOutputStream().write("howdy, planet!\n".getBytes)
     }
   }
 
