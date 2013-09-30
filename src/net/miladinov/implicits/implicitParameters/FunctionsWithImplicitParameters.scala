@@ -7,13 +7,13 @@ package net.miladinov.implicits.implicitParameters
 
 object FunctionsWithImplicitParameters {
 
-  def maxListUpperBound [T <: Ordered[T]] (elements: List[T]): T =
+  def maxListImpParm [T] (elements: List[T]) (implicit orderer: T => Ordered[T]): T =
     elements match {
       case List() => throw new IllegalArgumentException("Empty List!")
       case List(x) => x
       case x :: rest => {
-        val maxRest = maxListUpperBound(rest)
-        if (x > maxRest) x
+        val maxRest = maxListImpParm(rest)(orderer)
+        if (orderer(x) > maxRest) x
         else maxRest
       }
     }
