@@ -13,6 +13,9 @@ abstract class List [+T] {
     if (isEmpty) Nil
     else if (n <= 0) this
     else tail.drop(n - 1)
+
+  def :: [B >: T] (x: B): List[B] =
+    x :: this
 }
 
 case object Nil extends List[Nothing] {
