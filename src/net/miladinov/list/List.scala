@@ -8,6 +8,11 @@ abstract class List [+T] {
   def tail: List[T]
 
   def length: Int = if (isEmpty) 0 else 1 + tail.length
+
+  def drop (n: Int): List[T] =
+    if (isEmpty) Nil
+    else if (n <= 0) this
+    else tail.drop(n - 1)
 }
 
 case object Nil extends List[Nothing] {
