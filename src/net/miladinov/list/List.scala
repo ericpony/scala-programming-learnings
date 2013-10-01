@@ -6,6 +6,8 @@ abstract class List [+T] {
   def head: T
 
   def tail: List[T]
+
+  def length: Int = if (isEmpty) 0 else 1 + tail.length
 }
 
 case object Nil extends List[Nothing] {
