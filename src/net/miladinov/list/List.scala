@@ -16,6 +16,10 @@ abstract class List [+T] {
 
   def :: [B >: T] (x: B): List[B] =
     x :: this
+
+  def map [U] (f: T => U): List[U] =
+    if (isEmpty) Nil
+    else f(head) :: tail.map(f)
 }
 
 case object Nil extends List[Nothing] {
