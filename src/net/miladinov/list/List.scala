@@ -16,6 +16,10 @@ abstract class List [+T] {
 
   def :: [U >: T] (x: U): List[U] = new net.miladinov.list.::(x, this)
 
+  def ::: [U >: T] (prefix: List[U]): List[U] =
+    if (prefix.isEmpty) this
+    else prefix.head :: prefix.tail ::: this
+
   def map [U] (f: T => U): List[U] =
     if (isEmpty) Nil
     else f(head) :: tail.map(f)
