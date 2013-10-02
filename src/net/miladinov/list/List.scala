@@ -14,8 +14,7 @@ abstract class List [+T] {
     else if (n <= 0) this
     else tail.drop(n - 1)
 
-  def :: [B >: T] (x: B): List[B] =
-    x :: this
+  def :: [U >: T] (x: U): List[U] = new net.miladinov.list.::(x, this)
 
   def map [U] (f: T => U): List[U] =
     if (isEmpty) Nil
