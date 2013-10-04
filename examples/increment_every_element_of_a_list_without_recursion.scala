@@ -1,8 +1,9 @@
 // Here's a very inefficient approach to incrementing every element in a list
 // of arbitrary size (as much as the heap allows):
+import scala.collection.mutable.ListBuffer
 
 def incrementAllIteratively(xs: List[Int]): List[Int] = {
-  var result = List[Int]()
-  for (x <- xs) result = result ::: List(x + 1)
-  result
+  val buffer = new ListBuffer[Int]
+  for (x <- xs) buffer += x + 1
+  buffer.toList
 }
