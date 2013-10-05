@@ -18,6 +18,5 @@ val persons = List(lara, bob, julie)
 // children in that list. Using map, flatMap and filter, you can formulate
 // the following query:
 
-persons filter (parent => !parent.isMale) flatMap
-  (parent => parent.children map (children => (parent.name, children.name)))
-
+persons filter (parent => !parent.isMale) flatMap (parent =>
+  parent.children map (children => (parent.name, children.name)))
