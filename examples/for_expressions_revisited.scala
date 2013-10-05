@@ -27,3 +27,11 @@ persons filter (parent => !parent.isMale) flatMap (parent =>
 
 persons withFilter (parent => !parent.isMale) flatMap (parent =>
   parent.children map (children => (parent.name, children.name)))
+
+// These queries do their job, but they are not exactly trivial to write or
+// understand. Is there a simpler way? In fact, there is. Remember the for
+// expressions from before? Using a for expression, the same example can be
+// written as follows:
+
+for (parent <- persons; if !parent.isMale; child <- parent.children)
+  yield (parent.name, child.name)
