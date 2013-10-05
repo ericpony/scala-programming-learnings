@@ -20,3 +20,10 @@ val persons = List(lara, bob, julie)
 
 persons filter (parent => !parent.isMale) flatMap (parent =>
   parent.children map (children => (parent.name, children.name)))
+
+// We could optimize this example a bit by using a withFilter call instead of
+// filter. This would avoid the creation of an intermediate data structure
+// for male persons:
+
+persons withFilter (parent => !parent.isMale) flatMap (parent =>
+  parent.children map (children => (parent.name, children.name)))
