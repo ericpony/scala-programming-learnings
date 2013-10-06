@@ -68,3 +68,12 @@ for {
 // In the most common case, the pattern pat is just a variable x, as in
 // x <- expr. In that case, the variable x simply iterates over all elements
 // returned by expr.
+
+// A definition is of the form: pat = expr
+// This definition binds the pattern pat to the value of expr. So it has the
+// same effect as a val definition:
+//
+// val x = expr
+//
+// The most common case is again where the pattern is a simple variable x,
+// e.g., x = expr. This defines x as a name for the value expr.
