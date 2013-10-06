@@ -35,3 +35,21 @@ persons withFilter (parent => !parent.isMale) flatMap (parent =>
 
 for (parent <- persons; if !parent.isMale; child <- parent.children)
   yield (parent.name, child.name)
+
+// Generally, a for expression is of the form:
+// for ( seq ) yield expr
+// Here, seq is a sequence of generators, definitions, and filters, with
+// semicolons between successive elements. An example is the for expression:
+
+for (p <- persons; n = p.name; if n startsWith "To")
+  yield n
+
+// This for expression contains one generator, one definition, and one filter.
+// As mentioned before, you can also enclose the sequence in braces instead of
+// parentheses. Then the semicolons become optional:
+
+for {
+  p <- persons          // a generator
+  n = p.name            // a definition
+  if n startsWith "To"  // a filter
+} yield n
