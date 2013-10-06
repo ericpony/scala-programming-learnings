@@ -77,3 +77,20 @@ for {
 //
 // The most common case is again where the pattern is a simple variable x,
 // e.g., x = expr. This defines x as a name for the value expr.
+//
+// A filter is of the form:
+//
+// if expr
+//
+// Here, expr is an expression of type Boolean. The filter drops from the
+// iteration all elements for which expr returns false. Every for expression
+// starts with a generator. If there are several generators in a for
+// expression, later generators vary more rapidly than earlier ones. You can
+// verify this easily with the following simple test:
+
+for (x <- List(1, 2); y <- List("one", "two"))
+  yield (x, y)
+
+// scala> for (x <- List(1, 2); y <- List("one", "two"))
+//   yield (x, y)
+//     | res14: List[(Int, String)] = List((1,one), (1,two), (2,one), (2,two))
