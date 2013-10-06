@@ -53,3 +53,18 @@ for {
   n = p.name            // a definition
   if n startsWith "To"  // a filter
 } yield n
+
+// A generator is of the form:
+//
+// pat <- expr
+//
+//  The expression expr typically returns a list, even though you will see
+// later that this can be generalized. The pattern pat gets matched
+// one-by-one against all elements of that list. If the match succeeds, the
+// variables in the pattern get bound to the corresponding parts of the
+// element, just the way it is described in Chapter 15. But if the match
+// fails, no MatchError is thrown. Instead, the element is simply discarded
+// from the iteration.
+// In the most common case, the pattern pat is just a variable x, as in
+// x <- expr. In that case, the variable x simply iterates over all elements
+// returned by expr.
