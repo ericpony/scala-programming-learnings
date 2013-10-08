@@ -13,4 +13,10 @@ def queens (n: Int): List[List[(Int, Int)]] = {
   placeQueens(n)
 }
 
-def isSafe(queen: (Int, Int), queens: List[(Int, Int)]): Boolean
+def isSafe(queen: (Int, Int), queens: List[(Int, Int)]): Boolean =
+  queens forall (q => !inCheck(queen, q))
+
+def inCheck(q1: (Int, Int), q2: (Int, Int)): Boolean =
+  q1._1 == q2._1 ||                           // same row
+  q1._2 == q2._2 ||                           // same column
+  (q1._1 - q2._1).abs == (q1._2 - q2._2).abs  // on diagonal
