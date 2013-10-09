@@ -64,7 +64,9 @@ for (b1 <- books; b2 <- books; if b1 != b2;
 
 def removeDuplicates [A] (xs: List[A]): List[A] = {
   if (xs.isEmpty) xs
-  else xs.head :: removeDuplicates(xs.tail filter (x => x != xs.head))
+  else xs.head :: removeDuplicates(
+    for (x <- xs.tail if x != xs.head) yield x
+  )
 }
 
 // removeDuplicates: [A](xs: List[A])List[A]
