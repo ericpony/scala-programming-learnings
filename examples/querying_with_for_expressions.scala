@@ -72,3 +72,49 @@ def removeDuplicates [A] (xs: List[A]): List[A] = {
 // removeDuplicates: [A](xs: List[A])List[A]
 // scala> removeDuplicates(res3)
 // res4: List[String] = List(Ullman, Jeffrey)
+
+// For expressions are just syntactic sugar over expressions of flatMap,
+// map and withFilter.
+
+// Here are the rules for transformation:
+
+// A for expression with one generator:
+// ------------------------------------
+// for (x <- expr1) yield expr2
+// becomes
+// expr1.map(x => expr2)
+
+// for expressions starting with a generator and a filter:
+// ------------------------------------------------------
+// for (x <- expr1 if expr2) yield expr3
+// becomes
+// for (x <- expr1 withFilter (x => expr2)) yield expr3
+// which then becomes
+// expr1 withFilter (x => expr2 ) map (x => expr3)
+// A more general form of this is:
+// for (x <- expr1 if expr2; seq) yield expr3
+// becomes
+// for (x <- expr1 withFilter expr2; seq) yield expr3
+
+// for expressions starting with two generators:
+// ---------------------------------------------
+// for (x <- expr1; y <- expr2; seq) yield expr3
+// becomes
+// expr1.flatMap(x => for (y <- expr2; seq) yield expr3)
+
+
+// Putting the above rules together, here's how the following
+// for expression:
+
+for (b1 <- books; b2 <- books; if b1 != b2;
+     a1 <- b1.authors;
+     a2 <- b2.authors; if a1 == a2)
+yield a1
+
+// translates into invocations of map, withFilter and flatMap:
+
+books flatMap (b1 =>
+  books withFilter (b2 => b1 != b2) flatMap (b2 =>
+    b1.authors flatMap (a1 =>
+      b2.authors withFilter (a2 => a1 == a2) map (a2 =>
+        a1))))
