@@ -118,3 +118,47 @@ books flatMap (b1 =>
     b1.authors flatMap (a1 =>
       b2.authors withFilter (a2 => a1 == a2) map (a2 =>
         a1))))
+
+// for expressions with patterns in generators:
+// --------------------------------------------
+// Where the for expression binds a tuple of variables:
+// for ((x1, ..., xn) <- expr1) yield expr2
+// becomes
+// expr1.map { case x1, ..., xn) => expr2 }
+// Things become a bit more complicated if the left hand side of the generator
+// is an arbitrary pattern pat instead of single variable or a tuple:
+// for (pat <- expr1) yield expr2
+// becomes
+// expr1 withFilter {
+//   case pat => true
+//   case _ => false
+// } map {
+//   case pat => expr2
+// }
+// That is, the generated items are first filtered and only those that match pat are mapped.
+// Therefore, it’s guaranteed that a pattern-matching generator will never throw a MatchError.
+
+// for expressions with embedded definitions:
+// ------------------------------------------
+// The last missing situation is where a for expression contains embedded definitions.
+// Here's a typical case:
+// for (x <- expr1; y = expr2; seq) yield expr3
+// Assume again that seq is a (possibly empty) sequence of generators, definitions,
+// and filters. This expression is translated to the following one:
+// for ((x, y) <- for (x <- expr1) yield (x, expr2); seq)
+// yield expr3
+
+// So you see that expr2 is evaluated each time there is a new x value being generated.
+// This re-evaluation is necessary, because expr2 might refer to x and so needs to be
+// re-evaluated for changing values of x. For you as a programmer the conclusion is that it's
+// probably not a good idea to have definitions embedded in for expressions that do not refer
+// to variables bound by some preceding generator, because re-evaluating such expressions
+// would be wasteful. For instance, instead of:
+//
+// for (x <- 1 to 1000; y = expensiveComputationNotInvolvingX)
+// yield x * y
+//
+// it’s usually better to write:
+//
+// val y = expensiveComputationNotInvolvingX
+// for (x <- 1 to 1000) yield x * y
