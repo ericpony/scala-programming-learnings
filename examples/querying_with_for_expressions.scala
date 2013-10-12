@@ -162,3 +162,33 @@ books flatMap (b1 =>
 //
 // val y = expensiveComputationNotInvolvingX
 // for (x <- 1 to 1000) yield x * y
+
+// What about for loops that simply perform a side effect without returning
+// anything? Their translation is similar, but simpler than for expressions.
+// In principle, wherever the previous translation scheme used a map or a flatMap
+// in the translation, the translation scheme for for loops uses just a foreach.
+// For instance, the expression:
+//
+// for (x <- expr1) body
+// becomes
+// expr1 foreach (x => body)
+//
+// A larger example is the expression:
+//
+// for (x <- expr1; if expr2; y <- expr3) body
+// which becomes
+// expr1 withFilter (x => expr2) foreach (x =>
+//   expr3 foreach (y => body)
+//
+// For example, the following expression sums up all elements of a matrix
+// represented as a list of lists:
+
+val xss: List[List[Int]] = List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9))
+var sum = 0
+for (xs <- xss; x <- xs) sum += x
+
+// This loop is translated into two nested foreach applications:
+
+xss foreach(xs =>
+  xs foreach (x =>
+    sum += x))
