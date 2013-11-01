@@ -31,7 +31,7 @@ withPrintWriter(
 )
 
 // The advantage of using this method is that it's withPrintWriter, not user code, that assures the file is closed
-// at the end. So it’s impossible to forget to close the file. This technique is called the loan pattern, because a
+// at the end. So it's impossible to forget to close the file. This technique is called the loan pattern, because a
 // control-abstraction function, such as withPrintWriter, opens a resource and "loans" it to a function. For instance,
 // withPrintWriter loans a PrintWriter to the function, op. When the function completes, it signals that it no longer
 // needs the "borrowed" resource. The resource is then closed in a finally block, to ensure it is indeed closed,

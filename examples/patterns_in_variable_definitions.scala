@@ -11,7 +11,7 @@ val (number, string) = myTuple
 
 // This construct is quite useful when working with case classes.
 // If you know the precise case class you are working with,
-// then you can deconstruct it with a pattern. Here’s an example:
+// then you can deconstruct it with a pattern. Here's an example:
 import net.miladinov.patternmatching.{BinaryOperator, Number}
 
 val expression = new BinaryOperator("*", Number(5), Number(1))

@@ -67,7 +67,7 @@ merge_sort_swapped(abcde)(_ > _)
 // This inference scheme suggests the following library design principle: When designing
 // a polymorphic method that takes some non-function arguments and a function argument,
 // place the function argument last in a curried parameter list by its own.
-// That way, the method’s correct instance type can be inferred from the non-function arguments,
+// That way, the method's correct instance type can be inferred from the non-function arguments,
 // and that type can in turn be used to type check the function argument. The net effect is that
 // users of the method will be able to give less type information and write function literals in
 // more compact ways.

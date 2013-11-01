@@ -4,7 +4,7 @@
 // presented in this example file.
 
 // You've already seen on several occasions list literals such as List(1, 2, 3).
-// There’s nothing special about their syntax. A literal like List(1, 2, 3) is simply
+// There's nothing special about their syntax. A literal like List(1, 2, 3) is simply
 // the application of the object List to the elements 1, 2, 3. That is, it is equivalent
 // to List.apply(1, 2, 3):
 List.apply(1, 2, 3)
