@@ -1,6 +1,8 @@
 package net.miladinov.collection
 
 import collection._
+import collection.mutable
+import scala.collection.generic.CanBuildFrom
 
 class PrefixMap [T] extends mutable.Map[String, T] with mutable.MapLike[String, T, PrefixMap[T]] {
 
@@ -42,4 +44,24 @@ class PrefixMap [T] extends mutable.Map[String, T] with mutable.MapLike[String, 
   def -=(key: String): this.type = { remove(key); this }
 
   override def empty = new PrefixMap[T]
+}
+
+object PrefixMap extends {
+  def empty [T] = new PrefixMap[T]
+
+  def apply [T] (kvs: (String, T)*): PrefixMap[T] = {
+    val m: PrefixMap[T] = empty
+    for (kv <- kvs) m += kv
+    m
+  }
+
+  def newBuilder[T]: mutable.Builder[(String, T), PrefixMap[T]] =
+    new mutable.MapBuilder[String, T, PrefixMap[T]](empty)
+
+  implicit def canBuildFrom[T]: CanBuildFrom[PrefixMap[_], (String, T), PrefixMap[T]] = {
+    new CanBuildFrom[PrefixMap[_], (String, T), PrefixMap[T]] {
+      def apply (from: PrefixMap[_]) = newBuilder[T]
+      def apply() = newBuilder[T]
+    }
+  }
 }
