@@ -6,8 +6,7 @@ object Email {
 
   // The (mandatory) extraction method
   def unapply (email: String): Option[(String, String)] = {
-    val parts = email split "@"
-    parts match {
+    email split "@" match {
       case Array(user, domain) => Some(user, domain)
       case _ => None
     }
