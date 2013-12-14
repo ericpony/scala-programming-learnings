@@ -8,4 +8,7 @@ object RegexExtractors {
 
   // Scala raw strings let you write regex patterns with fewer escape slashes
   val RawStringDecimal = new Regex("""(-)?(\d+)(\.\d*)""")
+
+  // An even shorter way to write regex patterns: use the .r method on StringOps
+  val RawStringOpsDecimal = """(-)?(\d+)(\.\d*)""".r
 }
