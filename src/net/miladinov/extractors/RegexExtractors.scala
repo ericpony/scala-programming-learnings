@@ -11,4 +11,9 @@ object RegexExtractors {
 
   // An even shorter way to write regex patterns: use the .r method on StringOps
   val RawStringOpsDecimal = """(-)?(\d+)(\.\d*)""".r
+
+  def extractParts (decimal: String): (String, String, String) = {
+    val RawStringOpsDecimal(sign, integerPart, fractionPart) = decimal
+    (sign, integerPart, fractionPart)
+  }
 }
