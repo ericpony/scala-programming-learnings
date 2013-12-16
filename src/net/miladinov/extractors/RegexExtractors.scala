@@ -16,4 +16,10 @@ object RegexExtractors {
     val RawStringOpsDecimal(sign, integerPart, fractionPart) = decimal
     (sign, integerPart, fractionPart)
   }
+
+  def printParts (decimalString: String) {
+    // s, i, f: sign, integer, fraction parts
+    for (Decimal(s, i, f) <- RawStringOpsDecimal findAllIn decimalString)
+      println(s"sign: $s, integer part: $i, fraction part: $f")
+  }
 }
