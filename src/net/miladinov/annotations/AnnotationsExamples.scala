@@ -13,7 +13,7 @@ package net.miladinov.annotations
  *
  * The annotation applies to the entirety of the declaration or definition that follows it.
  */
-@deprecated class QuickAndDirty {
+@deprecated object AnnotationsExamples {
 
   // Annotations can also be applied to an expression, as with the @unchecked annotation for pattern matching
   def nonExhaustivePatternMatch (value: Int) {
