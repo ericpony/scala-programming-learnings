@@ -15,4 +15,12 @@ package net.miladinov.annotations
  */
 @deprecated class QuickAndDirty {
 
+  // Annotations can also be applied to an expression, as with the @unchecked annotation for pattern matching
+  def nonExhaustivePatternMatch (value: Int) {
+    (value: @unchecked) match {
+      case 10 => // do stuff for 10
+      case n if n < 10 => // do stuff for less than 10
+      // more non-exhaustive cases here...
+    }
+  }
 }
