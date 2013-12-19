@@ -23,4 +23,9 @@ package net.miladinov.annotations
       // more non-exhaustive cases here...
     }
   }
+
+  // Annotations can take arguments, and for some annotations that support them, they can be arbitrary expressions, so
+  // long as they type check. Some annotation classes let you refer to other variables that are in scope:
+  @cool val normal = "Hello"
+  @coolerThan(normal) val fonzy = "Heeyyy"
 }
