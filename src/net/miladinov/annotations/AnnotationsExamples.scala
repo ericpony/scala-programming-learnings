@@ -29,3 +29,27 @@ package net.miladinov.annotations
   @cool val normal = "Hello"
   @coolerThan(normal) val fonzy = "Heeyyy"
 }
+
+object AnnotationsThatTakeOtherAnnotations {
+  // Internally, Scala represents an annotaiton as just a constructor call of an annotation class - replace the '@' with
+  // 'new' and you have a valid instance creation expression. This means that named and default annotation arguments are
+  // supported naturally, because Scala already has named and default arguments for method and constructor calls.
+  // One slightly tricky bit concerns annotations that conceptually take other annotations as arguments, which are
+  // required by some frameworks. You cannot write an annotation directly as an argument to an annotation,
+  // because annotations are not valid expressions. In such cases you must use 'new' instead of '@',
+  // as illustrated here:
+  import annotation._
+
+  class strategy (arg: Annotation) extends Annotation
+  class delayed extends Annotation
+
+  // You can't say it like this:
+  // @strategy(@delayed) def f(){}
+
+  // error: illegal start of simple expression
+  // @strategy(@delayed) def f(){}
+  //           ^
+
+  // Instead, annotations passed to other annotations have to be written like this:
+  @strategy(new delayed) def f(){}
+}
