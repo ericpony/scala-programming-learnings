@@ -53,3 +53,41 @@ object AnnotationsThatTakeOtherAnnotations {
   // Instead, annotations passed to other annotations have to be written like this:
   @strategy(new delayed) def f(){}
 }
+
+object StandardAnnotations {
+  // Scala includes several standard annotations. They are for features that are used widely enough to merit putting
+  // in the language specification, but that are not fundamental enough to merit their own syntax. Over time, there
+  // should be a trickle of new annotations that are added to the standard in just the same way.
+
+
+  // Deprecation
+  // Sometimes you write a class or method that you later wish you had not. Once it is available, though, code written
+  // by other people might call the method. Thus, you cannot simply delete the method, because this would cause other
+  // people's code to stop compiling.
+  // Deprecation lets you gracefully remove a method or class that turns out to be a mistake. You mark the method
+  // or class as deprecated, and then anyone who calls that method or class will get a deprecation warning.
+  // They had better heed this warning and update their code! The idea is that after a suit- able amount of time
+  // has passed, you feel safe in assuming that all reasonable clients will have stopped accessing the deprecated
+  // class or method and thus that you can safely remove it.
+
+  // You mark a method as deprecated simply by writing @deprecated be- fore it. For example:
+  // @deprecated def bigMistake() = { /* your awful code here */ }
+
+  // Such an annotation will cause the Scala compiler to emit deprecation warnings whenever Scala code
+  // accesses the method.
+
+  // If you supply a string as an argument to @deprecated, that string will be emitted along with the error message.
+  // Use this message to explain to developers what they should use instead of the deprecated method.
+  @deprecated("use newShinyMethod() instead")
+  def bigMistake () = { /* Old and busted */ }
+
+  def newShinyMethod () = { /* The new hotness */ }
+
+  // Now any callers will get a message like this:
+  // $ scalac -deprecation CodeWithDeprecatedAnnotations.scala
+  // CodeWithDeprecatedAnnotations.scala:33: warning: method bigMistake in object
+  // CodeWithDeprecatedAnnotations is deprecated: use newShinyMethod() instead
+  //      bigMistake()
+  //      ^
+  // one warning found
+}
