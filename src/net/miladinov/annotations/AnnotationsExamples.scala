@@ -90,4 +90,14 @@ object StandardAnnotations {
   //      bigMistake()
   //      ^
   // one warning found
+
+  // Volatile fields
+  // Concurrent programming does not mix well with shared mutable state. For this reason, the focus of Scala's concurrency
+  // support is message passing and a minimum of shared mutable state. Nonetheless, sometimes programmers want to use
+  // mutable state in their concurrent programs. The @volatile annotation helps in such cases. It informs the compiler
+  // that the variable in question will be used by multiple threads. Such variables are implemented so that reads and
+  // writes to the variable are slower, but accesses from multiple threads behave more predictably. The @volatile keyword
+  // gives different guarantees on different platforms. On the Java platform, however, you get the same behavior as if
+  // you wrote the field in Java code and marked it with the Java volatile modifier.
+  @volatile var numMissiles: Int = 15
 }
