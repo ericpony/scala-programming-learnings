@@ -101,3 +101,46 @@ object StandardAnnotations {
   // you wrote the field in Java code and marked it with the Java volatile modifier.
   @volatile var numMissiles: Int = 15
 }
+
+object BinarySerialization {
+  // Many languages include a framework for binary serialization. A serialization framework helps you convert objects into
+  // a stream of bytes and vice versa. This is useful if you want to save objects to disk or send them over the network.
+  // XML can help with the same goals, but it has different tradeoffs regarding speed, space usage, flexibility and
+  // portability. Scala does not have its own serialization framework. Instead you should use a framework from your
+  // underlying platform. What Scala does is provide three annotations that are useful for a variety of frameworks.
+  // Also, the Scala compiler for the Java platform interprets these annotations in the Java way.
+
+  // The first annotation indicates whether a class is serializable at all. Most clases are serializable, but not all.
+  // A handle to  socket or GUI window, for example, cannot be serialized. By default, a class is not considered serializable.
+  // You could add a @serializable annotation to any class you would like to be serializable.
+
+  // However, as of Scala 2.9.0, this is deprecated.
+  @serializable
+  class OldAndBustedSerializable (val foo: Int,  val bar: String, val baz: Boolean)
+
+  // instead of `@serializable class C`, use `class C extends Serializable`
+  class NewHotnessSerializable (val foo: Int, val bar: String, val baz: Boolean) extends Serializable
+
+  // The second annotation helps deal with serializable classes changing as time goes by. You can attach a serial number
+  // to the current version of a class by adding an annotation like @SerialVersionUID(1234), where 1234
+  // should be replaced by your serial number of choice. The framework should store this number in the generated
+  // byte stream. When you later reload that byte stream and try to convert it to an object, the framework can check
+  // that the current version of the class has the same version number as the version in the byte stream.
+  // If you want to make a serialization-incompatible change to your class, then you can change the version number.
+  // The framework will then automatically refuse to load old instances of the class.
+  @SerialVersionUID(1234L)
+  case class Datom (entity: String, attribute: String, value: String, time: Long)
+
+  // Finally, Scala provides a @transient annotation for fields that should not be serialized at all. If you mark
+  // a field as @transient, then the framework should not save the field even when the surrounding object is serialized.
+  // When the object is loaded, the field will be restored to the default value for the type of the field
+  // annotated as @transient.
+
+
+  class WindowHandle (val title: String, @transient val windowManager: IWindowManager) extends Serializable {
+    /* stuff here */
+  }
+
+  // Window managers probably don't want to be serialized
+  trait IWindowManager
+}
