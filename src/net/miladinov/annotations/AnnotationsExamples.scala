@@ -1,5 +1,7 @@
 package net.miladinov.annotations
 
+import scala.beans.BeanProperty
+
 /**
  * Annotations are allowed on any kind of declaration or definition, including:
  *
@@ -143,4 +145,20 @@ object BinarySerialization {
 
   // Window managers probably don't want to be serialized
   trait IWindowManager
+}
+
+object GettersAndSettersOhMy {
+  // Scala code normally does not need explicit get and set methods for fields, because Scala blends the syntax for
+  // field access and method invocation. Some platform-specific frameworks do expect get and set methods, however.
+  // For that purpose, Scala provides the @BeanProperty annotation. If you add this annotation to a field,
+  // the compiler will automatically generate get and set methods for you. If you annotate a field named crazy,
+  // the get method will be named getCrazy and the set method will be named setCrazy.
+  @BeanProperty
+  var crazy: Int = 11
+
+  // The generated get and set methods are only available after a compilation pass completes. Thus, you cannot call
+  // these get and set methods from code you compile at the same time as the annotated fields. This should not be
+  // a problem in practice, because in Scala code you can access the fields directly. This feature is intended to
+  // support frameworks that expect regular get and set methods, and typically you do not compile the framework
+  // and the code that uses it at the same time.
 }
