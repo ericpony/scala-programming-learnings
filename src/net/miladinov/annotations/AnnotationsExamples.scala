@@ -1,6 +1,7 @@
 package net.miladinov.annotations
 
 import scala.beans.BeanProperty
+import scala.annotation.tailrec
 
 /**
  * Annotations are allowed on any kind of declaration or definition, including:
@@ -161,4 +162,19 @@ object GettersAndSettersOhMy {
   // a problem in practice, because in Scala code you can access the fields directly. This feature is intended to
   // support frameworks that expect regular get and set methods, and typically you do not compile the framework
   // and the code that uses it at the same time.
+}
+
+object RecursiveFunctions {
+  // You would typically add the @tailrec annotation to a method that needs to be tail recursive, for instance because
+  // you expect that it would recurse very deeply otherwise. To make sure that the Scala compiler does perform the
+  // tail-recursion optimization described earlier on this method, you can add @tailrec
+  // in front of the method definition. If the optimization cannot be performed,
+  // you will then get a warning together with an explanation of the reasons.
+  @tailrec
+  def oneWayToGetTheLastElementOfAList [T] (list: List[T]): T = {
+    list match {
+      case head :: Nil  => head
+      case head :: tail => oneWayToGetTheLastElementOfAList(tail)
+    }
+  }
 }
