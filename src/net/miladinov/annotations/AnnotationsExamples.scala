@@ -178,3 +178,14 @@ object RecursiveFunctions {
     }
   }
 }
+
+object NativeMethods {
+  // The @native annotation informs the compiler that a method's implementation is supplied by the runtime rather than
+  // in Scala code. The compiler will toggle the appropriate flags in the output, and it will be up to the developer
+  // to supply the implementation using a mechanism such as the Java Native Interface (JNI).
+
+  // When using the @native annotation, a method body must be supplied, but it will not be emitted into the output.
+  // For example, here is how to declare that method beginCountdown will be supplied by the runtime:
+  @native
+  def beginCountdown() { }
+}
