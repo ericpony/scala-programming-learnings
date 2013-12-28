@@ -15,4 +15,8 @@ object XmlLiterals {
   //   expect them to process individual Nodes. You can still use such methods with individual nodes, however, since
   //   Node extends from NodeSeq. This may sound weird, but it works out well for XML. You can think of an individual
   //   Node as a one-element NodeSeq.
+
+  // You are not restricted to writing out the exact XML you want, character for character. You can evaluate Scala code
+  // in the middle of an XML literal by using curly braces as an escape. Here is a simple example:
+  val escapingExample = <a> {"hello" + " from XML!"} </a>
 }
