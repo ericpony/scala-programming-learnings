@@ -31,6 +31,9 @@ import scala.annotation.tailrec
   // long as they type check. Some annotation classes let you refer to other variables that are in scope:
   @cool val normal = "Hello"
   @coolerThan(normal) val fonzy = "Heeyyy"
+
+  class cool extends scala.annotation.Annotation
+  class coolerThan (val decoratee: String) extends cool
 }
 
 object AnnotationsThatTakeOtherAnnotations {
