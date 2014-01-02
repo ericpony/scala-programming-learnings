@@ -45,4 +45,27 @@ object XmlLiterals {
     // added to the <a> element. Otherwise, nothing is added. Note in the above example that "nothing" as an XML node
     // is denoted with xml.NodeSeq.Empty.
   }
+
+  // An expression inside a brace escape does not have to evaluate to an XML node. It can evaluate to any Scala value.
+  // In such a case, the result is converted to a string and inserted as a text node:
+  // scala> <a> {3 + 4} </a>
+  // res3: scala.xml.Elem = <a> 7 </a>
+
+  // Any <, >, and & characters in the text will be escaped if you print the node back out:
+  val potentialSecurityHole = <a> {"</a>potential security hole<a>"} </a>
+  // scala> import net.miladinov.xml.XmlLiterals
+
+  // XmlLiterals.potentialSecurityHole
+  // import net.miladinov.xml.XmlLiterals
+
+  // scala> res0: scala.xml.Elem = <a> &lt;/a&gt;potential security hole&lt;a&gt; </a>
+
+  // To contrast, if you create XML with low-level string operations, you will run into traps such as the following:
+  // scala> "<a>" + "</a>potential security hole<a>" + "</a>"
+  // res1: String = <a></a>potential security hole<a></a>
+
+  // What happens here is that a user-supplied string has included XML tags of its own, in this case </a> and <a>.
+  // This behavior can allow some nasty surprises for the original programmer, because it allows the user to affect
+  // the resulting XML tree outside of the space provided for the user inside the <a> element. You can prevent
+  // this entire class of problems by always constructing XML using XML literals, not string appends.
 }
