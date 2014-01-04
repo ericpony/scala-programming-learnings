@@ -68,4 +68,10 @@ object XmlLiterals {
   // This behavior can allow some nasty surprises for the original programmer, because it allows the user to affect
   // the resulting XML tree outside of the space provided for the user inside the <a> element. You can prevent
   // this entire class of problems by always constructing XML using XML literals, not string appends.
+
+  // By the way, if you want to include a curly brace ('{' or '}') as XML text, as opposed to using them to escape to
+  // Scala code, simply write two curly braces in a row:
+
+  // scala> <a> {{{{brace yourself!}}}} </a>
+  // res1: scala.xml.Elem = <a> {{brace yourself!}} </a>
 }
