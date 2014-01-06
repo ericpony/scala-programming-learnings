@@ -19,4 +19,10 @@ object DestructuringXml {
   val fragment2 = <a> input ---&gt; output </a>
   // DestructuringXml.fragment2.text
   // scala> res0: String = " input ---> output "
+
+  // Extracting sub-elements
+  // If you want to find a sub-element by tag name, simply call \ with the name of the tag
+  val fragment3 = <a><b><c>hello</c></b></a>
+  // DestructuringXml.fragment3 \ "b"
+  // scala> res0: scala.xml.NodeSeq = NodeSeq(<b><c>hello</c></b>)
 }
