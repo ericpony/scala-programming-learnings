@@ -25,4 +25,20 @@ object DestructuringXml {
   val fragment3 = <a><b><c>hello</c></b></a>
   // DestructuringXml.fragment3 \ "b"
   // scala> res0: scala.xml.NodeSeq = NodeSeq(<b><c>hello</c></b>)
+
+  // You can do a "deep search" and look through sub-sub-elements, etc., by using \\ instead of the \ operator:
+  // scala> DestructuringXml.fragment3 \ "c"
+  // res1: scala.xml.NodeSeq = NodeSeq()
+
+  // scala> DestructuringXml.fragment3 \\ "c"
+  // res2: scala.xml.NodeSeq = NodeSeq(<c>hello</c>)
+
+  // scala> DestructuringXml.fragment3 \ "a"
+  // res3: scala.xml.NodeSeq = NodeSeq()
+
+  // scala> DestructuringXml.fragment3 \\ "a"
+  // res4: scala.xml.NodeSeq = NodeSeq(<a><b><c>hello</c></b></a>)
+
+  // Note: Scala uses \ and \\ instead of XPath’s / and //. The reason is that // starts a comment in Scala!
+  // Thus, some other symbol has to be used, and using the other kind of slashes works well.
 }
