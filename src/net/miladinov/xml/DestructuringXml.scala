@@ -41,4 +41,19 @@ object DestructuringXml {
 
   // Note: Scala uses \ and \\ instead of XPath’s / and //. The reason is that // starts a comment in Scala!
   // Thus, some other symbol has to be used, and using the other kind of slashes works well.
+
+  // Extracting attributes
+  // You can extract tag attributes using the same \ and \\ methods. Simple put an @ before the attribute name:
+  val joe = <employee name="Joe" rank="code monkey" serial="123" />
+  // scala> DestructuringXml.joe \ "@name"
+  // scala> res0: scala.xml.NodeSeq = Joe
+
+  // scala> DestructuringXml.joe \\ "@name"
+  // scala> res1: scala.xml.NodeSeq = NodeSeq(Joe)
+
+  // scala> DestructuringXml.joe \\ "@rank"
+  // scala> res2: scala.xml.NodeSeq = NodeSeq(code monkey)
+
+  // scala> DestructuringXml.joe \ "@serial"
+  // scala> res3: scala.xml.NodeSeq = 123
 }
