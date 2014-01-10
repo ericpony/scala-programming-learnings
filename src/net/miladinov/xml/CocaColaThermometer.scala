@@ -30,30 +30,30 @@ abstract class CocaColaThermometer {
       <purchasePrice>{purchasePrice}</purchasePrice>
       <condition>{condition}</condition>
     </cctherm>
+
+  // Here is the method in action:
+  // scala> import net.miladinov.xml.CocaColaThermometer
+
+  // val therm = new CocaColaThermometer {
+  //   override val dateObtained: String = "March 14, 2006"
+  //   override val yearMade: Int = 1952
+  //   override val purchasePrice: Int = 500
+  //   override val bookPrice: Int = 2199
+  //   override val description: String = "hot dog #5"
+  //   override val condition: Int = 9
+  // }
+  // import net.miladinov.xml.CocaColaThermometer
+  //
+  // scala>      |      |      |      |      |      |      | therm: net.miladinov.xml.CocaColaThermometer = hot dog #5
+  //
+  // scala> therm.toXML
+  // res0: scala.xml.Elem =
+  // <cctherm>
+  //       <description>hot dog #5</description>
+  //       <yearMade>1952</yearMade>
+  //       <dateObtained>March 14, 2006</dateObtained>
+  //       <bookPrice>2199</bookPrice>
+  //       <purchasePrice>500</purchasePrice>
+  //       <condition>9</condition>
+  //     </cctherm>
 }
-
-// Here is the method in action:
-// scala> import net.miladinov.xml.CocaColaThermometer
-
-// val therm = new CocaColaThermometer {
-//   override val dateObtained: String = "March 14, 2006"
-//   override val yearMade: Int = 1952
-//   override val purchasePrice: Int = 500
-//   override val bookPrice: Int = 2199
-//   override val description: String = "hot dog #5"
-//   override val condition: Int = 9
-// }
-// import net.miladinov.xml.CocaColaThermometer
-//
-// scala>      |      |      |      |      |      |      | therm: net.miladinov.xml.CocaColaThermometer = hot dog #5
-//
-// scala> therm.toXML
-// res0: scala.xml.Elem =
-// <cctherm>
-//       <description>hot dog #5</description>
-//       <yearMade>1952</yearMade>
-//       <dateObtained>March 14, 2006</dateObtained>
-//       <bookPrice>2199</bookPrice>
-//       <purchasePrice>500</purchasePrice>
-//       <condition>9</condition>
-//     </cctherm>
