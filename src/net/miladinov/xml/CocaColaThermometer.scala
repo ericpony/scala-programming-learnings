@@ -57,3 +57,35 @@ abstract class CocaColaThermometer {
   //       <condition>9</condition>
   //     </cctherm>
 }
+
+object CocaColaThermometer {
+  // Using methods for destructuring XML, you can now write the dual of a serializer, a parser from XML back into your
+  // internal data structures. For example, you can parse back a CocaColaThermometer instance by using the following code:
+  def fromXML (node: scala.xml.Node): CocaColaThermometer =
+    new CocaColaThermometer {
+      override val dateObtained: String = (node \ "dateObtained").text
+      override val yearMade: Int = (node \ "yearMade").text.toInt
+      override val purchasePrice: Int = (node \ "purchasePrice").text.toInt
+      override val bookPrice: Int = (node \ "bookPrice").text.toInt
+      override val description: String = (node \ "description").text
+      override val condition: Int = (node \ "condition").text.toInt
+    }
+
+  // This code searches through an input XML node, named node, to find each of the six pieces of data needed to specify
+  // a CocaColaThermometer. The data that is text is extracted with .text and left as is. Here is the method in action:
+
+  // scala> val node = therm.toXML
+  // node: scala.xml.Elem =
+  // <cctherm>
+  //   <description>hot dog #5</description>
+  //   <yearMade>1952</yearMade>
+  //   <dateObtained>March 14, 2006</dateObtained>
+  //   <bookPrice>2199</bookPrice>
+  //   <purchasePrice>500</purchasePrice>
+  //   <condition>9</condition>
+  // </cctherm>
+
+  // scala> CocaColaThermometer.fromXML(node)
+  // res0: net.miladinov.xml.CocaColaThermometer = hot dog #5
+}
+
