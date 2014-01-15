@@ -37,7 +37,7 @@ import scala.annotation.tailrec
 }
 
 object AnnotationsThatTakeOtherAnnotations {
-  // Internally, Scala represents an annotaiton as just a constructor call of an annotation class - replace the '@' with
+  // Internally, Scala represents an annotation as just a constructor call of an annotation class - replace the '@' with
   // 'new' and you have a valid instance creation expression. This means that named and default annotation arguments are
   // supported naturally, because Scala already has named and default arguments for method and constructor calls.
   // One slightly tricky bit concerns annotations that conceptually take other annotations as arguments, which are
@@ -76,7 +76,7 @@ object StandardAnnotations {
   // has passed, you feel safe in assuming that all reasonable clients will have stopped accessing the deprecated
   // class or method and thus that you can safely remove it.
 
-  // You mark a method as deprecated simply by writing @deprecated be- fore it. For example:
+  // You mark a method as deprecated simply by writing @deprecated before it. For example:
   // @deprecated def bigMistake() = { /* your awful code here */ }
 
   // Such an annotation will cause the Scala compiler to emit deprecation warnings whenever Scala code
