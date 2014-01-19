@@ -9,5 +9,5 @@ object SimpleDatabase {
 }
 
 object SimpleBrowser {
-  def recipesUsing (food: Food) = SimpleDatabase.allRecipes.filter(recipe => recipe.ingredients.contains(food))
+  def recipesUsing (food: Food): List[Recipe] = SimpleDatabase.allRecipes.filter(recipe => recipe.ingredients.contains(food))
 }
