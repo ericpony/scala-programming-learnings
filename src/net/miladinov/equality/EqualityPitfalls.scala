@@ -61,5 +61,30 @@ object EqualityPitfalls {
     // object identity. That’s why the comparison "p1 equals p2a" yields false even though points p1 and p2a have the
     // same x and y values. That’s also why the contains method in HashSet returned false. Since that method operates
     // on generic sets, it calls the generic equals method in Object instead of the overloaded variant in Point.
+
+
+    class PointWithSlightlyBetterEqualsSignature(val x: Int, val y: Int) {
+      // A better equals method is the following:
+      // A better definition, but still not perfect
+      override def equals(other: Any) = other match {
+        case that: PointWithSlightlyBetterEqualsSignature => this.x == that.x && this.y == that.y
+        case _ => false
+      }
+    }
+
+    // Now equals has the correct type. It takes a value of type Any as parameter and it yields a Boolean result.
+    // The implementation of this method uses a pattern match. It first tests whether the other object is also of type
+    // Point. If it is, it compares the coordinates of the two points and returns the result.
+
+    // Otherwise the result is false. A related pitfall is to define == with a wrong signature. Normally, if you try
+    // to redefine == with the correct signature, which takes an argument of type Any, the compiler will give you an
+    // error because you try to override a final method of type Any. However, newcomers to Scala sometimes make
+    // two errors at once: They try to override == and they give it the wrong signature. For instance:
+
+    // def ==(other: Point): Boolean = // Don’t do this!
+
+    // In that case, the user-defined == method is treated as an overloaded variant of the same-named method class Any,
+    // and the program compiles. However, the behavior of the program would be just as dubious as if you had defined
+    // equals with the wrong signature.
   }
 }
