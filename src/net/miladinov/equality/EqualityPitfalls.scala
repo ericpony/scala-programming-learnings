@@ -87,4 +87,50 @@ object EqualityPitfalls {
     // and the program compiles. However, the behavior of the program would be just as dubious as if you had defined
     // equals with the wrong signature.
   }
+
+  object ChangingEqualsWithoutAlsoChangingHashCode {
+    // If you repeat the comparison of p1 and p2a with the latest definition of Point defined previously, you will get
+    // true, as expected. However, if you repeat the HashSet.contains test, you will probably still get false.
+
+    // scala> val p1, p2 = new Point(1, 2)
+    // p1: Point = Point@67e5a7
+    // p2: Point = Point@1165e21
+    // scala> HashSet(p1) contains p2
+    // res4: Boolean = false
+
+    // In fact, this outcome is not 100% certain. You might also get true from the experiment. If you do, you can try
+    // with some other points with coordinates 1 and 2. Eventually, you’ll get one which is not contained in the set.
+    // What goes wrong here is that Point redefined equals without also redefining hashCode.
+
+    // Note that the collection in the example above is a HashSet. This means elements of the collection are put in
+    // "hash buckets" determined by their hash code. The contains test first determines a hash bucket to look in
+    // and then compares the given elements with all elements in that bucket. Now, the last version of class Point did
+    // redefine equals, but it did not at the same time redefine hashCode. So hashCode is still what it was in its
+    // version in class AnyRef: some transformation of the address of the allocated object. The hash codes of p1 and p2
+    // are almost certainly different, even though the fields of both points are the same. Different hash codes mean with
+    // high probability different hash buckets in the set. The contains test will look for a matching element
+    // in the bucket which corresponds to p2's hash code. In most cases, point p1 will be in another bucket, so it will
+    // never be found. p1 and p2 might also end up by chance in the same hash bucket. In that case the test would
+    // return true.
+
+    // The problem was that the last implementation of Point violated the contract on hashCode as defined for class Any:
+    // If two objects are equal according to the equals method, then calling the hashCode method on each of the two
+    // objects must produce the same integer result. In fact, it's well known in Java that hashCode and equals should
+    // always be redefined together. Furthermore, hashCode may only depend on fields that equals depends on. For the
+    // Point class, the following would be a suitable definition of hashCode:
+
+    class Point(val x: Int, val y: Int) {
+      override def hashCode = 41 * (41 + x) + y
+      override def equals(other: Any) = other match {
+        case that: Point => this.x == that.x && this.y == that.y
+        case _ => false
+      }
+    }
+
+    // This is just one of many possible implementations of hashCode. Adding the constant 41 to one integer field x,
+    // multiplying the result with the prime number 41, and adding to that result the other integer field y gives a
+    // reasonable distribution of hash codes at a low cost in running time and code size.
+    // Adding hashCode fixes the problems of equality when defining classes like Point. However, there are still other
+    // trouble spots to watch out for.
+  }
 }
