@@ -133,4 +133,51 @@ object EqualityPitfalls {
     // Adding hashCode fixes the problems of equality when defining classes like Point. However, there are still other
     // trouble spots to watch out for.
   }
+
+  object DefiningEqualsInTermsOfMutableFields {
+    // Consider the following slight variation of class Point:
+    class Point(var x: Int, var y: Int) { // Problematic
+      override def hashCode = 41 * (41 + x) + y
+      override def equals(other: Any) = other match {
+        case that: Point => this.x == that.x && this.y == that.y
+        case _ => false
+      }
+    }
+
+    // The only difference is that the fields x and y are now vars instead of vals. The equals and hashCode methods are
+    // now defined in terms of these mu- table fields, so their results change when the fields change. This can have
+    // strange effects once you put points in collections:
+
+    // scala> val p = new Point(1, 2)
+    // p: Point = Point@6bc
+    // scala> val coll = HashSet(p)
+    // coll: scala.collection.mutable.HashSet[Point] =
+    // Set(Point@6bc)
+    // scala> coll contains p
+    // res5: Boolean = true
+
+    // Now, if you change a field in point p, does the collection still contain the point? We’ll try it:
+
+    // scala> p.x += 1
+    // scala> coll contains p
+    // res7: Boolean = false
+
+    // This looks strange. Where did p go? More strangeness results if you check whether the iterator of the set contains p:
+
+    // scala> coll.iterator contains p
+    // res8: Boolean = true
+
+    // So here's a set that does not contain p, yet p is among the elements of the set! What happened, of course,
+    // is that after the change to the x field, the point p ended up in the wrong hash bucket of the set coll. That is,
+    // its original hash bucket no longer corresponded to the new value of its hash code. In a manner of speaking, the
+    // point p "dropped out of sight" in the set coll even though it still belonged to its elements.
+
+    // The lesson to be drawn from this example is that when equals and hashCode depend on mutable state, it causes
+    // problems for potential users. If they put such objects into collections, they have to be careful never to modify
+    // the depended-on state, and this is tricky. If you need a comparison that takes the current state of an object
+    // into account, you should usually name it something else, not equals. Considering the last definition of Point,
+    // it would have been preferable to omit a redefinition of hashCode and to name the comparison method equalContents,
+    // or some other name different from equals. Point would then have inherited the default implementation of equals
+    // and hashCode. So p would have stayed locatable in coll even after the modification to its x field.
+  }
 }
