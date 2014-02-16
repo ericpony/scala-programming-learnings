@@ -20,6 +20,6 @@ object AnyEquality {
   // to override == directly, as it is defined as a final method in class Any.
 
   // That is, Scala treats == as if it were defined as follows in class Any:
-  final def == (that: Any): Boolean =
-    if (null eq this) {null eq that} else {this equals that}
+  // final def == (that: Any): Boolean =
+  //   if (null eq this) {null eq that} else {this equals that}
 }
