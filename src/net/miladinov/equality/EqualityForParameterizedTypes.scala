@@ -37,9 +37,10 @@ object EqualityForParameterizedTypes {
     // This would give:
 
     override def equals (other: Any) = other match {
-      case that: Branch[T] => this.elem == that.elem &&
-        this.left == that.left &&
-        this.right == that.right
+      case that: Branch[_] => (that canEqual this) &&
+                              this.elem  == that.elem &&
+                              this.left  == that.left &&
+                              this.right == that.right
       case _ => false
     }
 
