@@ -1,5 +1,7 @@
 package net.miladinov.equality
 
+import scala.annotation.tailrec
+
 object RecipesForEqualsAndHashCodes {
 
   // Here's the recipe for overriding equals:
@@ -61,5 +63,28 @@ object RecipesForEqualsAndHashCodes {
   // If you adhere to the preceding recipe, equality is guaranteed to be an equivalence relation,
   // as is required by the equals contract.
 
+  // Here's a version of the Rational class, which we've worked with before,
+  // altered to demonstrate our equals() recipe in action:
+
+  class Rational (n: Int, d: Int) {
+    require(d != 0)
+
+    private val g = gcd(n.abs, d.abs)
+    val numer = (if (d < 0) -n else n) / g
+    val denom = d.abs / g
+
+    @tailrec
+    private def gcd (a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
+    override def equals (other: Any): Boolean =
+      other match {
+        case that: Rational => (that canEqual this) && numer == that.numer && denom == that.denom
+        case _ => false
+      }
+
+    def canEqual (other: Any): Boolean = other.isInstanceOf[Rational]
+
+    override def toString = if (denom == 1) numer.toString else numer + "/" + denom
+  }
 
 }
