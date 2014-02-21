@@ -84,7 +84,42 @@ object RecipesForEqualsAndHashCodes {
 
     def canEqual (other: Any): Boolean = other.isInstanceOf[Rational]
 
+    override def hashCode: Int = 41 * (41 + numer) + denom
+
     override def toString = if (denom == 1) numer.toString else numer + "/" + denom
+  }
+
+  // For hashCode, you can usually achieve satisfactory results if you use the following recipe, which is similar to a
+  // recipe recommended for Java classes in Effective Java. Include in the calculation each field in your object that
+  // is used to determine equality in the equals method (the "relevant" fields). For each relevant field, no matter its
+  // type, you can calculate a hash code by invoking hashCode on it. To calculate a hash code for the entire object,
+  // add 41 to the first field's hash code, multiply that by 41, add the second field's hash code, multiply that by
+  // 41, add the third field's hash code, multiply that by 41, and so on, until you've done this for all relevant fields.
+
+  // For example, to implement the hash code for an object that has five relevant fields named a, b, c, d and e, you
+  // would write:
+
+  class Example {
+    val a, b, c, d, e: Any = "example"
+
+    override def hashCode: Int =
+      41 * (
+        41 * (
+          41 * (
+            41 * (
+              41 + a.hashCode
+            ) + b.hashCode
+          ) + c.hashCode
+        ) + d.hashCode
+      ) + e.hashCode
+  }
+
+  // If you wish, you can leave off the hashCode invocation on fields of type Int, Short, Byte and Char. The hash code
+  // for an Int is the value of the Int, as are the hash codes of Shorts, Bytes, and Chars when automatically widened to
+  // Int. Given numer or denom are Ints, therefore, we implemented Rational's hashCode method like this:
+
+  class RationalExcerpt (n: Int, d: Int) extends Rational(n, d) {
+    override def hashCode: Int = 41 * (41 + numer) + denom
   }
 
 }
