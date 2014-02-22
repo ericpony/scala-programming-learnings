@@ -122,4 +122,17 @@ object RecipesForEqualsAndHashCodes {
     override def hashCode: Int = 41 * (41 + numer) + denom
   }
 
+  // The number 41 was selected for the multiplications because it is an odd prime. You could use another number, but it
+  // should be an odd prime to minimize the potential for information loss on overflow. The reason we added 41 to the
+  // innermost value is to reduce the likelihood that the first multiplication will result in zero, under the assumption
+  // that is it is more likely the first field used will be zero than -41. The number 41 was chosen for the addition
+  // only for looks. You could use any non-zero integer.
+
+  // If the equals method invokes super.equals(that) as part of its calculation, you should start your hashCode
+  // calculation with an invocation of super.hashCode. For example, has Rational's equals method invoked
+  // super.equals(that), its hashCode would have been:
+
+  class RationalWithSuperclassExcerpt (n: Int, d: Int) extends Rational(n, d) {
+    override def hashCode: Int = 41 * (41 * super.hashCode + numer) + denom
+  }
 }
