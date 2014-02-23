@@ -135,4 +135,15 @@ object RecipesForEqualsAndHashCodes {
   class RationalWithSuperclassExcerpt (n: Int, d: Int) extends Rational(n, d) {
     override def hashCode: Int = 41 * (41 * super.hashCode + numer) + denom
   }
+
+  // One thing to keep in mind as you write hashCode methods using this approach is that your hash code will only be as
+  // good as the hash codes you build it out of, namely the hash codes you obtain by calling hashCode on the relevant
+  // fields of your object. Sometimes you may need to do something extra besides just calling hashCode on the field to
+  // get a useful hash code for that field. For example, if one of your fields is a collection, you probably want a hash
+  // code for that field that is based on all the elements contained in the collection. If the field is a List, Set,
+  // Map, or tuple, you can simply call hashCode on the field, because equals and hashCode are overridden in those
+  // classes to take into account the contained elements. However the same is not true for Arrays, which do not take
+  // elements into account when calculating a hash code. Thus for an array, you should treat each element of the array
+  // like an individual field of your object, calling hashCode on each element explicitly, or passing the array to one
+  // of the hashCode methods in the singleton object, java.util.Arrays.
 }
