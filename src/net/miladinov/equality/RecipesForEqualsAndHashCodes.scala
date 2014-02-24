@@ -146,4 +146,16 @@ object RecipesForEqualsAndHashCodes {
   // elements into account when calculating a hash code. Thus for an array, you should treat each element of the array
   // like an individual field of your object, calling hashCode on each element explicitly, or passing the array to one
   // of the hashCode methods in the singleton object, java.util.Arrays.
+
+  // Lastly, if you find that a particular hash code calculation is harming the performance of your program, you can
+  // consider caching the hash code. If the object is immutable, you can calculate the hash code when the object is
+  // created and store it in a field. You can do this by simply overriding hashCode with a val instead of a def, like this:
+
+  class RationalWithCachedHashCode (n: Int, d: Int) extends Rational(n, d) {
+    // Make hashCode a val instead of a def
+    override val hashCode: Int = 41 * (41 * super.hashCode + numer) + denom
+  }
+
+  // This approach trades off memory for computation time, because each instance of the immutable class will have one
+  // more field to hold the cached hash code value.
 }
