@@ -158,4 +158,10 @@ object RecipesForEqualsAndHashCodes {
 
   // This approach trades off memory for computation time, because each instance of the immutable class will have one
   // more field to hold the cached hash code value.
+
+  // In retrospect, defining a correct implementation of equals has been surprisingly subtle. You must be careful about
+  // the type signature; you must override hashCode; you should avoid dependencies on mutable state; and you should
+  // implement and use a canEqual method if your class is non-final. Given how difficult it is to implement a correct
+  // equality method, you might prefer to define your classes of comparable objects as case classes. That way,
+  // the Scala compiler will add equals and hashCode methods with the right properties automatically.
 }
