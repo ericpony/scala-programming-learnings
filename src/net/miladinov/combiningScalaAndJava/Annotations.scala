@@ -12,4 +12,10 @@ object Annotations {
     // to the emitted code. Because of this, Java compilers can issue deprecation warnings when Java code accesses
     // deprecated Scala methods.
   }
+
+  object VolatileFields {
+    // Likewise, any field marked @volatile in Scala is given the Java volatile modifier in the emitted code.
+    // Thus, volatile fields in Scala behave exactly according to Java's semantics, and accesses to volatile fields
+    // are sequenced precisely according to the rules specified for volatile fields in the Java memory model.
+  }
 }
