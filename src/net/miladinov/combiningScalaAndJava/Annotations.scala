@@ -18,4 +18,15 @@ object Annotations {
     // Thus, volatile fields in Scala behave exactly according to Java's semantics, and accesses to volatile fields
     // are sequenced precisely according to the rules specified for volatile fields in the Java memory model.
   }
+
+  object Serialization {
+    // Scala's three standard serialization annotations are all translated to Java equivalents. A @serializable
+    // class has Java's Serializable interface added to it. A @SerialVersionUID(1234L) annotation is converted
+    // to the following Java field definition:
+
+    // Java serial version marker
+    // private final static long SerialVersionUID = 1234L
+
+    // Any variable marked @transient is given the Java transient modifier.
+  }
 }
