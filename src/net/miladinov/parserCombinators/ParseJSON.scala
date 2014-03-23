@@ -27,10 +27,18 @@ import scala.io.Source
 import scala.util.parsing.combinator._
 
 class JSON extends JavaTokenParsers {
-  def value : Parser[Any] = obj | arr | stringLiteral | floatingPointNumber | "null" | "true" | "false"
-  def obj : Parser[Any] = "{"~repsep(member, ",")~"}"
-  def arr : Parser[Any] = "["~repsep(value, ",")~"]"
-  def member: Parser[Any] = stringLiteral~":"~value
+  def value: Parser[Any] = (
+      obj
+    | arr
+    | stringLiteral
+    | floatingPointNumber ^^ (_.toDouble)
+    | "null"  ^^ (_ => null)
+    | "true"  ^^ (_ => true)
+    | "false" ^^ (_ => false)
+  )
+  def obj: Parser[Map[String, Any]] = "{" ~> repsep(member, ",") <~ "}" ^^ (Map() ++ _)
+  def arr: Parser[List[Any]] = "[" ~> repsep(value, ",") <~ "]"
+  def member: Parser[(String, Any)] = stringLiteral ~ ":" ~ value ^^ { case name ~ ":" ~ value => (name, value) }
 }
 
 // To try out the JSON parsers, we'll change the framework a bit, so that the parser operates on a resource file
@@ -48,8 +56,17 @@ object ParseJSON extends JSON {
 // Note that parseAll and parse exist in overloaded variants: both can take a character sequence or alternatively an
 // input reader as second argument.
 
-// If you run the ParseJSON program, you should get:
-// [14.2] parsed: (({~List((("address book"~:)~(({~List((("name"~:)~"John Smith"),
-// (("address"~:)~(({~List((("street"~:)~"10 Market Street"), (("city"~:)~"San Francisco, CA"),
-// (("zip"~:)~"94111")))~})), (("phone numbers"~:)~(([~List("408 338-4238", "408 111-6892"))~]))))~}))))~})
+// This is now a full JSON parser that returns meaningful results. If you run this parser on the address-book.json
+// file, you will get the following result (after adding some newlines and indentation):
+// [14.2] parsed:
+// Map(
+//    "address book" -> Map(
+//        "name" -> "John Smith",
+//        "address" -> Map(
+//            "street" -> "10 Market Street",
+//            "city" -> "San Francisco, CA",
+//            "zip" -> "94111"),
+//        "phone numbers" -> List("408 338-4238", "408 111-6892")
+//    )
+// )
 
