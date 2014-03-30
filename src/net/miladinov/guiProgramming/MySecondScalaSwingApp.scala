@@ -1,6 +1,7 @@
 package net.miladinov.guiProgramming
 
 import scala.swing._
+import scala.swing.event.ButtonClicked
 
 object MySecondScalaSwingApp extends SimpleSwingApplication {
   def top: Frame = new MainFrame {
@@ -18,6 +19,15 @@ object MySecondScalaSwingApp extends SimpleSwingApplication {
       contents += button
       contents += label
       border = Swing.EmptyBorder(30, 30, 10, 30)
+    }
+
+    listenTo(button)
+    var numClicks = 0
+
+    reactions += {
+      case ButtonClicked(b) =>
+        numClicks += 1
+        label.text = s"Number of button clicks: $numClicks"
     }
   }
 }
