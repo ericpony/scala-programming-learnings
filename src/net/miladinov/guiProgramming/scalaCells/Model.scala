@@ -1,10 +1,13 @@
 package net.miladinov.guiProgramming.scalaCells
 
-class Model (val height: Int, val width: Int) {
+class Model (val height: Int, val width: Int) extends Evaluator with Arithmetic {
   case class Cell(row: Int, column: Int) {
     var formula: Formula = Empty
-    var value: Double = 0.0
-    override def toString: String = formula.toString
+    def value = evaluate(formula)
+    override def toString: String = formula match {
+      case Textual(s) => s
+      case _ => value.toString
+    }
   }
 
   val cells = Array.ofDim[Cell](height, width)
