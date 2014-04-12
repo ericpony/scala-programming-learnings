@@ -29,7 +29,11 @@ class Spreadsheet (val height: Int, val width: Int) extends ScrollPane {
       case TableUpdated(table, rows, column) =>
         for (row <- rows)
           cells(row)(column).formula = FormulaParsers.parse(userData(row, column))
+
+      case ValueChanged(cell) => updateCell(cell.row, cell.column)
     }
+
+    for (row <- cells; cell <- row) listenTo(cell)
   }
 
   val rowHeader = new ListView((0 until height) map (_.toString)) {
